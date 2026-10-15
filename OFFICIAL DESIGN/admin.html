@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Roundsquare administrator access." />
+    <title>Admin access | Roundsquare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="admin.css" />
+    <link rel="icon" type="image/png" href="Images/ihslogo.png" />
+  </head>
+  <body>
+    <main class="admin-page">
+      <div class="admin-glow admin-glow-one" aria-hidden="true"></div>
+      <div class="admin-glow admin-glow-two" aria-hidden="true"></div>
+
+      <a class="back-link" href="index.html">
+        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+        Back to home
+      </a>
+
+      <section class="admin-card" aria-labelledby="admin-title">
+        <div class="admin-brand">
+          <img src="Images/roundsquarelogo.jpeg" alt="Roundsquare logo" />
+          <span>Roundsquare <small>ADMIN</small></span>
+        </div>
+
+        <section class="admin-panel" aria-live="polite">
+          <div class="success-icon"><i class="fa-solid fa-bullhorn" aria-hidden="true"></i></div>
+          <p class="eyebrow">Access granted</p>
+          <h2>Send an update</h2>
+          <p>Publish a message for students who have signed in to the dashboard.</p>
+          <form class="admin-message-form">
+            <label for="message-title">Message title</label>
+            <input id="message-title" name="title" type="text" maxlength="80" placeholder="Important event update" required />
+            <label for="message-body">Message</label>
+            <textarea id="message-body" name="message" maxlength="500" placeholder="Write your message here..." required></textarea>
+            <button class="admin-submit" type="submit"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> SEND TO STUDENTS</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+          <div class="admin-messages-heading">
+            <h3>Sent messages</h3>
+            <button class="clear-messages" type="button">REMOVE ALL</button>
+          </div>
+          <div class="admin-message-list" aria-live="polite">
+            <p class="admin-message-empty">No messages sent yet.</p>
+          </div>
+          <button class="sign-out" type="button"><i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i> SIGN OUT</button>
+        </section>
+      </section>
+    </main>
+    <script type="module" src="admin.js"></script>
+  </body>
+</html>

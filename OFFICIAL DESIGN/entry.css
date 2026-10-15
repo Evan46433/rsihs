@@ -1,0 +1,70 @@
+/* entry.css - gate, door portal, title reveal, side cube.
+   Loaded after the existing stylesheets; touches none of their selectors. */
+:root{--gate-navy:#071b3b;--gate-ink:#030c1d;--gate-glow:#9cc4ff;--door-ms:1700ms}
+
+.entry-skipped #entry-gate{display:none}
+body.gate-locked{overflow:hidden}
+
+/* ---------- gate shell ---------- */
+.entry-gate{position:fixed;inset:0;z-index:9999;color:#fff;font-family:"Plus Jakarta Sans","Inter",sans-serif;touch-action:none;overflow:hidden}
+
+/* Two architectural door leaves: vertical panel reveals + a lit inner edge */
+.door{position:absolute;top:0;bottom:0;width:50%;background:
+  repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 72px),
+  linear-gradient(180deg,#0a2552,var(--gate-ink));
+  transition:transform var(--door-ms) cubic-bezier(.76,0,.18,1);will-change:transform}
+.door-left{left:0;transform-origin:left center;border-right:1px solid rgba(156,196,255,.35)}
+.door-right{right:0;transform-origin:right center;border-left:1px solid rgba(156,196,255,.35)}
+.door-seam{position:absolute;top:0;bottom:0;left:50%;width:2px;margin-left:-1px;background:linear-gradient(transparent,var(--gate-glow),transparent);opacity:0;transition:opacity .6s}
+
+.is-accepted .door-seam{opacity:.9}
+/* Portal: the doors swing open in perspective while the light seam widens */
+.is-opening .door-left{transform:perspective(1400px) rotateY(-78deg) translateX(-12%)}
+.is-opening .door-right{transform:perspective(1400px) rotateY(78deg) translateX(12%)}
+.is-opening .door-seam{width:36vw;margin-left:-18vw;opacity:0;transition:width var(--door-ms) ease,margin var(--door-ms) ease,opacity var(--door-ms) ease;background:radial-gradient(closest-side,rgba(255,255,255,.9),transparent)}
+
+#entry-canvas{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;transition:opacity .6s}
+.is-accepted #entry-canvas{pointer-events:none}
+.is-opening #entry-canvas{opacity:0}
+
+.entry-ui{position:absolute;left:0;right:0;bottom:clamp(40px,12vh,110px);text-align:center;pointer-events:none;transition:opacity .5s}
+.entry-kicker{margin:0 0 .6rem;font-size:.9rem;color:rgba(255,255,255,.6);letter-spacing:.02em}
+.entry-hint{margin:0;font-size:clamp(1.1rem,2.6vw,1.5rem);font-weight:600}
+.is-accepted .entry-ui{opacity:0}
+
+/* ---------- typographic reveal: each line rises out of its own mask ---------- */
+.entry-title{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);margin:0;text-align:center;
+  font-size:clamp(2.6rem,9vw,7.5rem);font-weight:800;line-height:1;letter-spacing:-.03em;pointer-events:none}
+.entry-title .line{display:block;overflow:hidden;padding:.06em 0}
+.entry-title .line>span{display:block;transform:translateY(110%);transition:transform 1.1s cubic-bezier(.2,.8,.2,1)}
+.entry-title .line:nth-child(2)>span{transition-delay:.18s;font-weight:600;color:var(--gate-glow)}
+.is-title .entry-title .line>span{transform:none}
+.is-opening .entry-title{opacity:0;transform:translateY(-50%) scale(1.25);transition:opacity 1s ease .2s,transform var(--door-ms) ease}
+
+.entry-skip{position:absolute;top:max(18px,env(safe-area-inset-top));right:18px;background:none;border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:999px;padding:.5rem 1rem;font:inherit;font-size:.85rem;cursor:pointer;touch-action:manipulation}
+.entry-skip:hover{background:rgba(255,255,255,.1)}
+.entry-skip:focus-visible,.side-cube:focus-visible{outline:2px solid var(--gate-glow);outline-offset:3px}
+.is-accepted .entry-skip{display:none}
+
+/* the site behind the doors pushes forward into place */
+body.portal-in .site-header,body.portal-in main,body.portal-in .marquee-banner,body.portal-in .site-footer{animation:portal-in 1.4s cubic-bezier(.2,.8,.2,1) both}
+@keyframes portal-in{from{transform:scale(1.06);opacity:.4;filter:blur(6px)}to{transform:none;opacity:1;filter:none}}
+
+/* ---------- persistent side cube ---------- */
+.side-cube{--s:clamp(54px,6vw,84px);position:fixed;right:clamp(10px,2vw,28px);top:50%;width:var(--s);height:var(--s);margin-top:calc(var(--s)/-2);
+  perspective:700px;z-index:40;pointer-events:none;opacity:0;transform:translateX(30px);transition:opacity .9s .3s,transform .9s .3s}
+body.cube-on .side-cube{opacity:1;transform:none}
+.cube{position:relative;width:100%;height:100%;transform-style:preserve-3d;transform:rotateX(-14deg) rotateY(var(--ry,0deg))}
+.face{position:absolute;inset:0;display:grid;place-items:center;background:#fff;border:1px solid rgba(7,27,59,.15);border-radius:6px;box-shadow:0 8px 24px rgba(7,27,59,.25)}
+.face img{width:72%;height:72%;object-fit:contain}
+.face-front{transform:translateZ(calc(var(--s)/2))}
+.face-back{transform:rotateY(180deg) translateZ(calc(var(--s)/2))}
+.face-right{transform:rotateY(90deg) translateZ(calc(var(--s)/2))}
+.face-left{transform:rotateY(-90deg) translateZ(calc(var(--s)/2))}
+@media (max-width:600px){.side-cube{--s:44px;top:auto;bottom:18px;margin-top:0}}
+
+@media (prefers-reduced-motion:reduce){
+  :root{--door-ms:1ms}
+  .entry-title .line>span{transition-duration:1ms}
+  body.portal-in .site-header,body.portal-in main,body.portal-in .marquee-banner,body.portal-in .site-footer{animation:none}
+}

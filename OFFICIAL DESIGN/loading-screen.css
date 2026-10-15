@@ -1,0 +1,85 @@
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: var(--midnight-navy);
+  animation: loading-screen-exit 600ms 2.1s ease forwards;
+}
+
+.loading-logos {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.loading-logo {
+  width: clamp(4.5rem, 10vw, 7rem);
+  height: clamp(4.5rem, 10vw, 7rem);
+  object-fit: contain;
+  opacity: 0;
+}
+
+.loading-logo-roundsquare {
+  border: 1px solid var(--warm-gold);
+  border-radius: 2px;
+}
+
+.loading-divider {
+  width: 1px;
+  height: clamp(4rem, 9vw, 6.5rem);
+  background: var(--warm-ivory);
+  opacity: 0;
+  animation: loading-divider-in 380ms ease forwards;
+}
+
+.loading-logo-ihs {
+  position: relative;
+  left: 60px;
+  width: clamp(5rem, 11vw, 7.8rem);
+  height: clamp(5rem, 11vw, 7.8rem);
+  animation: loading-ihs-in 650ms 420ms cubic-bezier(.22, .75, .25, 1) forwards;
+}
+
+.loading-logo-roundsquare {
+  animation: loading-roundsquare-in 650ms 620ms cubic-bezier(.22, .75, .25, 1) forwards;
+}
+
+@keyframes loading-divider-in {
+  from { opacity: 0; transform: scaleY(0); }
+  to { opacity: .85; transform: scaleY(1); }
+}
+
+@keyframes loading-ihs-in {
+  from { opacity: 0; transform: translateX(-80px); }
+  to { opacity: 1; transform: translateX(-42px); }
+}
+
+@keyframes loading-roundsquare-in {
+  from { opacity: 0; transform: translateX(80px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes loading-screen-exit {
+  0% { opacity: 1; }
+  75% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
+@media (max-width: 600px) {
+  .loading-logos { gap: 1rem; }
+  .loading-logo { width: 4.5rem; height: 4.5rem; }
+  .loading-divider { height: 4.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-screen { animation: loading-screen-exit 1ms 700ms linear forwards; }
+  .loading-divider,
+  .loading-logo-ihs,
+  .loading-logo-roundsquare {
+    animation-duration: 1ms;
+    animation-delay: 0ms;
+  }
+}

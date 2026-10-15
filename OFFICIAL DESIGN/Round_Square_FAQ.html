@@ -1,0 +1,2053 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101B2D">
+<title>The Happiness Compass · Round Square 2026</title>
+<!-- ROUND SQUARE FAQ CHATBOT -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  #rs-chat-button,
+  #rs-chat-window,
+  #rs-chat-window *,
+  #rs-chat-window *::before,
+  #rs-chat-window *::after {
+    box-sizing: border-box;
+    font-family: "DM Sans", "Segoe UI", Arial, sans-serif;
+    font-weight: 400;
+  }
+
+  #rs-chat-button {
+    position: fixed;
+    left: max(24px, env(safe-area-inset-left));
+    bottom: max(24px, env(safe-area-inset-bottom));
+    z-index: 9999;
+    isolation: isolate;
+    overflow: hidden;
+    border-radius: 17px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 19px 9px 10px;
+    border: 1px solid #a9c9e27a;
+    background:
+      linear-gradient(125deg, #8ab9df30, transparent 43%),
+      linear-gradient(145deg, #244c70bc, #102b48d9 62%, #0d2340e8);
+    color: #f5f8fc;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .015em;
+    cursor: pointer;
+    box-shadow: 0 12px 32px #07152c70, inset 0 1px #ffffff55, inset 0 -1px #7da5c229;
+    -webkit-backdrop-filter: blur(18px) saturate(145%);
+    backdrop-filter: blur(18px) saturate(145%);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+  }
+
+  #rs-chat-button::after {
+    position: absolute;
+    top: 0;
+    right: 22px;
+    width: 56px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ead39c, transparent);
+    content: "";
+    pointer-events: none;
+  }
+
+  .rs-launcher-mark {
+    display: block;
+    width: 34px;
+    height: 32px;
+    flex: 0 0 34px;
+    overflow: hidden;
+    border: 1px solid #c4d8e8a8;
+    border-radius: 8px;
+    background: #10223a;
+    box-shadow: 0 2px 8px #04101f50;
+  }
+
+  .rs-launcher-mark img,
+  .rs-chat-avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .rs-launch-close { display: none; }
+
+  #rs-chat-button[aria-expanded="true"] .rs-launch-open { display: none; }
+  #rs-chat-button[aria-expanded="true"] .rs-launch-close { display: inline; }
+
+  #rs-chat-button:hover {
+    border-color: #d5c18f;
+    background:
+      linear-gradient(125deg, #a8cbea3d, transparent 48%),
+      linear-gradient(145deg, #2c5c84d9, #153653ed 62%, #102945f2);
+    box-shadow: 0 16px 38px #07152c80, inset 0 1px #ffffff78, 0 0 0 3px #a9c9e21c;
+  }
+
+  #rs-chat-button:active {
+    transform: translateY(-1px) scale(.99);
+  }
+
+  #rs-chat-button:focus-visible,
+  #rs-chat-window button:focus-visible,
+  #rs-chat-window a:focus-visible,
+  #rs-chat-input:focus-visible {
+    outline: 2px solid #e4bf78;
+    outline-offset: 3px;
+  }
+
+  #rs-chat-button:focus-visible { outline-color: #c2d9ec; }
+
+  #rs-chat-window {
+    position: fixed;
+    left: max(24px, env(safe-area-inset-left));
+    bottom: calc(88px + env(safe-area-inset-bottom));
+    z-index: 9999;
+    isolation: isolate;
+    width: min(430px, calc(100vw - 48px - env(safe-area-inset-left) - env(safe-area-inset-right)));
+    max-width: calc(100vw - 48px - env(safe-area-inset-left) - env(safe-area-inset-right));
+    height: min(650px, calc(100dvh - 120px - env(safe-area-inset-top) - env(safe-area-inset-bottom)));
+    max-height: calc(100dvh - 120px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #ddc38c70;
+    border-radius: 24px;
+    background:
+      radial-gradient(ellipse at 14% 4%, #4d78a355, transparent 48%),
+      radial-gradient(ellipse at 100% 76%, #315b8350, transparent 45%),
+      linear-gradient(145deg, #173552d9 0%, #0b2038d4 58%, #122d49d9 100%);
+    color: #f3f6fa;
+    box-shadow: 0 24px 72px #06152a66, 0 4px 18px #0b1b3040, inset 0 1px #ffffff22;
+    -webkit-backdrop-filter: blur(24px) saturate(125%);
+    backdrop-filter: blur(24px) saturate(125%);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(14px) scale(.985);
+    transform-origin: bottom left;
+    visibility: hidden;
+    transition: opacity .22s ease, transform .22s ease, visibility .22s;
+  }
+
+  #rs-chat-window.rs-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    visibility: visible;
+  }
+
+  .rs-chat-header {
+    position: relative;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    min-height: 86px;
+    padding: 17px 18px;
+    overflow: hidden;
+    color: #f7f3eb;
+    background:
+      radial-gradient(circle at 86% 30%, #b9965730 0 1px, transparent 2px 37px, #b9965712 38px 39px, transparent 40px 77px, #b996570d 78px 79px, transparent 80px),
+      linear-gradient(122deg, #0c2038bc, #102844b0 55%, #0b1a2ec2);
+    border-bottom: 1px solid #ddc38c45;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .rs-chat-header::after {
+    position: absolute;
+    right: 22%;
+    bottom: 0;
+    width: 36%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #e4c17c, transparent);
+    content: "";
+    pointer-events: none;
+  }
+
+  .rs-chat-avatar {
+    width: 50px;
+    height: 48px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid #d4b26e;
+    border-radius: 10px;
+    background: #10223a;
+    box-shadow: 0 0 0 4px #d7bd7c14, 0 5px 16px #020b1766;
+  }
+
+  .rs-chat-heading { flex: 1; }
+
+  #rs-chat-window .rs-chat-heading strong {
+    display: block;
+    color: #faf7f0;
+    font-family: "DM Serif Display", Georgia, "Times New Roman", serif;
+    font-size: 21px;
+    font-weight: 400;
+    letter-spacing: .045em;
+    line-height: 1.2;
+  }
+
+  #rs-chat-window .rs-chat-heading strong,
+  #rs-chat-window .rs-chat-heading strong * {
+    font-family: "DM Serif Display", Georgia, "Times New Roman", serif;
+  }
+
+  .rs-chat-heading strong::after {
+    display: inline-block;
+    width: 23px;
+    height: 2px;
+    margin: 0 0 5px 8px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #f0d393, #bd9852);
+    content: "";
+  }
+
+  .rs-chat-heading small {
+    display: block;
+    margin-top: 4px;
+    color: #d6d8dc;
+    font-size: 11px;
+    letter-spacing: .015em;
+  }
+
+  #rs-chat-close {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    place-items: center;
+    background: transparent;
+    border: 1px solid #ffffff24;
+    border-radius: 50%;
+    color: #f4dfb2;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    transition: color .18s ease, border-color .18s ease, background .18s ease;
+  }
+
+  #rs-chat-close:hover {
+    border-color: #dfc17d99;
+    background: #ffffff0c;
+    color: #fff;
+  }
+
+  #rs-chat-messages {
+    position: relative;
+    z-index: 0;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 18px 17px;
+    background:
+      radial-gradient(circle at 1px 1px, #d4e4f212 1px, transparent 1.5px) 0 0 / 34px 34px,
+      radial-gradient(ellipse at 10% 8%, #8bb7d116, transparent 58%),
+      linear-gradient(145deg, #12304c48 0%, #091c314f 100%);
+    scroll-behavior: smooth;
+    scrollbar-color: #b99b62 #0b203660;
+    scrollbar-width: thin;
+  }
+
+  #rs-chat-messages::-webkit-scrollbar { width: 7px; }
+  #rs-chat-messages::-webkit-scrollbar-track { background: #0b203630; }
+  #rs-chat-messages::-webkit-scrollbar-thumb { border: 2px solid transparent; border-radius: 8px; background: #b99b62; background-clip: padding-box; }
+
+  .rs-msg {
+    position: relative;
+    width: fit-content;
+    max-width: 90%;
+    padding: 12px 14px;
+    margin-bottom: 13px;
+    border-radius: 16px;
+    font-size: 13px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .rs-message-text { display: block; }
+
+  .rs-message-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .rs-message-action,
+  .rs-footer-action {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #80602e;
+    font: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .rs-user .rs-message-action { color: #e1c98d; }
+
+  .rs-followups {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: -4px 0 14px;
+  }
+
+  .rs-msg.rs-entering { animation: rs-message-in .2s ease-out both; }
+
+  @keyframes rs-message-in {
+    from { opacity: 0; transform: translateY(7px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .rs-typing {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 54px;
+  }
+
+  .rs-typing span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #b79b64;
+    animation: rs-typing 1s infinite ease-in-out;
+  }
+
+  .rs-typing span:nth-child(2) { animation-delay: .15s; }
+  .rs-typing span:nth-child(3) { animation-delay: .3s; }
+
+  @keyframes rs-typing {
+    0%, 60%, 100% { opacity: .35; transform: translateY(0); }
+    30% { opacity: 1; transform: translateY(-4px); }
+  }
+
+  .rs-bot {
+    background: #f8fafceF;
+    border: 1px solid #ffffffc9;
+    border-top-left-radius: 4px;
+    color: #263244;
+    box-shadow: 0 4px 14px #2833470b;
+  }
+
+  .rs-user {
+    margin-left: auto;
+    background: linear-gradient(135deg, #264966eF, #173754f2);
+    color: #f5f7fa;
+    border-top-right-radius: 4px;
+    border: 1px solid #9ab5ca60;
+  }
+
+  .rs-scroll-latest {
+    position: absolute;
+    top: -54px;
+    right: 14px;
+    z-index: 1;
+    padding: 9px 13px;
+    border: 1px solid #a9c9e28c;
+    border-radius: 18px;
+    background:
+      linear-gradient(120deg, #8ab9df24, transparent 60%),
+      #143555eF;
+    color: #f7f9fc;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 8px 20px #07172b66, inset 0 1px #ffffff2e;
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    cursor: pointer;
+    transition: border-color .16s ease, background .16s ease, transform .16s ease;
+  }
+
+  .rs-scroll-latest:hover {
+    border-color: #d5c18f;
+    background-color: #1c4569f2;
+    transform: translateY(-2px);
+  }
+
+  .rs-quick-title {
+    font-size: 12px;
+    color: #f0d99e;
+    margin: 5px 0 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .12em;
+  }
+
+  #rs-chat-quick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 14px;
+  }
+
+  #rs-chat-quick[hidden],
+  .rs-scroll-latest[hidden] { display: none; }
+
+  .rs-quick {
+    border: 1px solid #b8c9d45c;
+    border-radius: 20px;
+    background: #102b46b5;
+    color: #f2f5f8;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color .16s ease, background .16s ease, border-color .16s ease, transform .16s ease, box-shadow .16s ease;
+  }
+
+  .rs-quick:hover {
+    background: #234562dd;
+    border-color: #c5a263b3;
+    box-shadow: 0 3px 10px #07172b36;
+  }
+
+  #rs-chat-quick .rs-quick {
+    padding: 9px 13px;
+    font-size: 11px;
+  }
+
+  #rs-chat-quick .rs-quick:hover { transform: translateY(-1px); }
+  #rs-chat-quick .rs-quick:focus-visible { border-color: #b99350; box-shadow: 0 0 0 3px #c3a36530; }
+
+  .rs-chat-input-area {
+    position: relative;
+    z-index: 1;
+    flex: 0 0 auto;
+    padding: 13px 15px max(12px, env(safe-area-inset-bottom));
+    border-top: 1px solid #d9cba95c;
+    background: linear-gradient(145deg, #10263fbd, #091a2dc9);
+    box-shadow: 0 -8px 22px #0b1b3033;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .rs-chat-form {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  #rs-chat-input {
+    min-width: 0;
+    flex: 1;
+    min-height: 42px;
+    max-height: 120px;
+    resize: none;
+    border: 1px solid #c9c3b7;
+    border-radius: 13px;
+    background: #fffefa;
+    color: #1c2a3c;
+    padding: 11px 13px;
+    outline: none;
+    font-size: 13px;
+    line-height: 1.45;
+    transition: border-color .18s ease, box-shadow .18s ease;
+  }
+
+  #rs-chat-input:focus {
+    border-color: #c3a365;
+    box-shadow: 0 0 0 3px #c3a36530;
+  }
+
+  #rs-chat-send {
+    width: 44px;
+    border: 0;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #eed39a, #c8a45c);
+    color: #10233a;
+    font-size: 19px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px #030d1c33;
+    transition: transform .16s ease, filter .16s ease, box-shadow .16s ease;
+  }
+
+  #rs-chat-send:hover:not(:disabled) {
+    filter: brightness(1.07);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 13px #030d1c44;
+  }
+
+  #rs-chat-send:disabled {
+    opacity: .5;
+    cursor: wait;
+  }
+
+  .rs-chat-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 10px;
+    color: #c5cfdb;
+    margin-top: 10px;
+    line-height: 1.4;
+  }
+
+  .rs-footer-action { font-size: 10px; white-space: nowrap; }
+
+  .rs-footer-action:hover,
+  .rs-message-action:hover { color: #f0d393; }
+
+  .rs-chat-link {
+    color: #8a672e;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 900px) and (min-width: 601px) {
+    #rs-chat-window {
+      left: max(20px, env(safe-area-inset-left));
+      bottom: calc(82px + env(safe-area-inset-bottom));
+      width: min(400px, calc(100vw - 40px - env(safe-area-inset-left) - env(safe-area-inset-right)));
+      height: min(610px, 76dvh);
+      max-height: calc(100dvh - 110px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    }
+
+    #rs-chat-button {
+      left: max(20px, env(safe-area-inset-left));
+      bottom: max(20px, env(safe-area-inset-bottom));
+    }
+  }
+
+  @media (max-width: 600px) {
+    #rs-chat-button {
+      left: max(10px, env(safe-area-inset-left));
+      bottom: max(14px, env(safe-area-inset-bottom));
+      padding: 9px 14px 9px 10px;
+      font-size: 13px;
+    }
+
+    #rs-chat-window {
+      left: max(10px, env(safe-area-inset-left));
+      bottom: calc(76px + env(safe-area-inset-bottom));
+      width: calc(100vw - 20px - env(safe-area-inset-left) - env(safe-area-inset-right));
+      max-width: calc(100vw - 20px - env(safe-area-inset-left) - env(safe-area-inset-right));
+      height: min(650px, calc(100dvh - 90px - env(safe-area-inset-top) - env(safe-area-inset-bottom)));
+      max-height: calc(100dvh - 90px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+      min-height: min(460px, calc(100dvh - 90px - env(safe-area-inset-top) - env(safe-area-inset-bottom)));
+      border-radius: 20px;
+    }
+
+    .rs-chat-header { min-height: 78px; padding: 13px 14px; }
+    .rs-chat-avatar { width: 43px; height: 42px; }
+    .rs-launcher-mark { width: 31px; height: 30px; flex-basis: 31px; }
+    #rs-chat-window .rs-chat-heading strong { font-size: 19px; }
+    .rs-chat-heading small { font-size: 10px; }
+    #rs-chat-messages { padding: 15px 13px; }
+    .rs-msg { max-width: 94%; font-size: 13px; }
+    .rs-chat-footer { align-items: flex-start; font-size: 9px; }
+    .rs-chat-footer > span:last-child { display: flex; gap: 9px; }
+  }
+
+  @media (max-width: 900px) and (max-height: 600px) and (orientation: landscape) {
+    #rs-chat-button {
+      left: max(10px, env(safe-area-inset-left));
+      bottom: max(14px, env(safe-area-inset-bottom));
+    }
+
+    #rs-chat-window {
+      left: max(10px, env(safe-area-inset-left));
+      bottom: calc(64px + env(safe-area-inset-bottom));
+      width: calc(100vw - 20px - env(safe-area-inset-left) - env(safe-area-inset-right));
+      max-width: calc(100vw - 20px - env(safe-area-inset-left) - env(safe-area-inset-right));
+      height: calc(100dvh - 76px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+      max-height: calc(100dvh - 76px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+      min-height: 240px;
+    }
+
+    .rs-chat-header { min-height: 64px; padding: 9px 13px; }
+    .rs-chat-avatar { width: 39px; height: 38px; }
+    #rs-chat-messages { padding-top: 10px; padding-bottom: 10px; }
+    .rs-chat-input-area { padding-top: 9px; }
+  }
+
+  @media (max-height: 460px) {
+    #rs-chat-window {
+      top: max(8px, env(safe-area-inset-top));
+      bottom: max(8px, env(safe-area-inset-bottom));
+      height: auto;
+      max-height: none;
+      min-height: 0;
+    }
+
+    .rs-scroll-latest { top: -48px; }
+    .rs-chat-header { min-height: 58px; padding: 7px 12px; }
+    .rs-chat-avatar { width: 38px; height: 36px; }
+    #rs-chat-messages { padding-top: 9px; padding-bottom: 9px; }
+    .rs-chat-input-area { padding-top: 8px; }
+    .rs-chat-footer { margin-top: 6px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #rs-chat-button,
+    #rs-chat-window,
+    #rs-chat-window *,
+    #rs-chat-window *::before,
+    #rs-chat-window *::after {
+      scroll-behavior: auto !important;
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+  }
+</style>
+
+<style>
+  :root {
+    --hc-navy: #101b2d;
+    --hc-card: #1a2940;
+    --hc-gold: #f3c45f;
+    --hc-cream: #f7f3ea;
+    --hc-muted: #b7c9e3;
+    --hc-burgundy: #71384a;
+  }
+
+  #rs-chat-button {
+    right: max(24px, env(safe-area-inset-right));
+    bottom: max(24px, env(safe-area-inset-bottom));
+    left: auto;
+    width: 66px;
+    height: 66px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    overflow: visible;
+    border: 1px solid #f3c45fbd;
+    border-radius: 50%;
+    background: radial-gradient(circle at 36% 25%, #253b57, #101b2d 70%);
+    box-shadow: 0 0 0 5px #f3c45f12, 0 10px 34px #07101ed1, 0 0 25px #f3c45f25;
+  }
+
+  #rs-chat-button::after { display: none; }
+  .hc-launcher-compass { display: grid; width: 42px; height: 42px; place-items: center; }
+  .hc-launcher-compass svg { width: 100%; height: 100%; animation: hc-needle-turn 24s linear infinite; }
+  .hc-launcher-label {
+    position: absolute;
+    right: 76px;
+    top: 50%;
+    padding: 8px 11px;
+    border: 1px solid #f3c45f50;
+    border-radius: 10px;
+    background: #101b2df2;
+    color: var(--hc-cream);
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-50%) translateX(5px);
+    transition: opacity .18s ease, transform .18s ease;
+  }
+  #rs-chat-button:hover .hc-launcher-label,
+  #rs-chat-button:focus-visible .hc-launcher-label { opacity: 1; transform: translateY(-50%); }
+
+  #rs-chat-window {
+    top: max(20px, env(safe-area-inset-top));
+    right: auto;
+    bottom: max(20px, env(safe-area-inset-bottom));
+    left: 50%;
+    width: min(720px, calc(100vw - 40px));
+    max-width: min(720px, calc(100vw - 40px));
+    height: min(880px, calc(100dvh - 40px - env(safe-area-inset-top) - env(safe-area-inset-bottom)));
+    max-height: calc(100dvh - 40px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    border: 1px solid #f3c45f70;
+    border-radius: 25px;
+    background:
+      radial-gradient(ellipse at 4% 0%, #71384a40, transparent 40%),
+      radial-gradient(ellipse at 100% 100%, #324f6d50, transparent 50%),
+      linear-gradient(145deg, #101b2df7, #14243af7 70%, #1a2940f7);
+    color: var(--hc-cream);
+    box-shadow: 0 25px 85px #050b15b8, inset 0 1px #ffffff14;
+    transform: translate(-50%, 20px) scale(.93);
+    transform-origin: center;
+  }
+  #hc-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: #080f1bd9;
+    -webkit-backdrop-filter: blur(7px);
+    backdrop-filter: blur(7px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .24s ease;
+  }
+  #hc-scrim[aria-hidden="false"] { opacity: 1; pointer-events: auto; }
+  #rs-chat-window.rs-open {
+    transform: translate(-50%, 0) scale(1);
+  }
+
+  .rs-chat-header.hc-header {
+    min-height: 76px;
+    padding: 14px 18px;
+    gap: 13px;
+    border-bottom-color: #f3c45f35;
+    background: linear-gradient(115deg, #101b2df0, #1a2940e8 72%, #71384a2e);
+  }
+
+  .hc-brand-mark {
+    width: 43px;
+    height: 43px;
+    flex: 0 0 43px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid #f3c45f8a;
+    border-radius: 12px;
+    background: #101b2d;
+    box-shadow: 0 0 0 4px #f3c45f12;
+  }
+  .hc-brand-mark img { width: 100%; height: 100%; object-fit: contain; }
+  .hc-brand-name { flex: 1; min-width: 0; }
+  .hc-brand-name strong {
+    display: block;
+    color: var(--hc-cream);
+    font-family: "DM Serif Display", Georgia, serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: .13em;
+  }
+  .hc-brand-name small { display: block; margin-top: 4px; color: var(--hc-muted); font-size: 11px; }
+  .hc-header-actions { display: flex; align-items: center; gap: 7px; }
+  .hc-icon-button {
+    display: inline-grid;
+    min-width: 38px;
+    min-height: 38px;
+    padding: 0 9px;
+    place-items: center;
+    border: 1px solid #f7f3ea24;
+    border-radius: 11px;
+    background: #ffffff08;
+    color: var(--hc-cream);
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background .18s ease, border-color .18s ease;
+  }
+  .hc-icon-button:hover { border-color: #f3c45f88; background: #f3c45f12; }
+  .hc-icon-button[hidden] { display: none; }
+  #rs-chat-close { width: 38px; height: 38px; padding: 0; font-size: 22px; }
+  #rs-chat-messages.hc-main {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 23px;
+    background: radial-gradient(circle at 1px 1px, #b7c9e30a 1px, transparent 1.5px) 0 0 / 32px 32px;
+    scrollbar-color: #9f8146 #101b2d;
+  }
+  .hc-home[hidden], .hc-chat-view[hidden] { display: none; }
+  .hc-eyebrow {
+    margin: 0 0 10px;
+    color: var(--hc-gold);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .19em;
+    text-transform: uppercase;
+  }
+  .hc-welcome-title {
+    margin: 0;
+    color: var(--hc-cream);
+    font-family: "DM Serif Display", Georgia, serif;
+    font-size: clamp(24px, 6vw, 34px);
+    font-weight: 400;
+    line-height: 1.12;
+  }
+  .hc-welcome-question {
+    margin: 9px 0 5px;
+    color: var(--hc-gold);
+    font-family: "DM Serif Display", Georgia, serif;
+    font-size: 18px;
+  }
+  .hc-intro { max-width: 410px; margin: 0; color: var(--hc-muted); font-size: 12px; line-height: 1.65; }
+  .hc-compass-seal {
+    float: right;
+    width: 59px;
+    height: 59px;
+    margin: 12px 2px 0 12px;
+    color: var(--hc-gold);
+    opacity: .83;
+  }
+  .hc-dial-wrap {
+    display: grid;
+    justify-items: center;
+    margin: 18px auto 22px;
+  }
+  .hc-dial-caption {
+    margin: 0 0 8px;
+    color: var(--hc-muted);
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .hc-dial {
+    position: relative;
+    width: min(100%, 350px);
+    aspect-ratio: 1;
+    isolation: isolate;
+    container-type: inline-size;
+    --dial-offset: -31cqw;
+  }
+  .hc-dial-rim {
+    position: absolute;
+    inset: 8%;
+    border: 1px solid #f3c45f5c;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle, #f3c45f0c 0 40%, transparent 41%),
+      repeating-conic-gradient(from 0deg, #f3c45f00 0deg 14deg, #f3c45f35 14.2deg 14.6deg, #f3c45f00 15deg 30deg),
+      radial-gradient(circle, #1a2940 0 56%, #101b2d 57% 72%, #1a2940 73%);
+    box-shadow: 0 0 32px #f3c45f13, inset 0 0 25px #050b1538;
+  }
+  .hc-dial-rim::before, .hc-dial-rim::after {
+    position: absolute;
+    inset: 7%;
+    border: 1px solid #f3c45f32;
+    border-radius: 50%;
+    content: "";
+  }
+  .hc-dial-rim::after { inset: 18%; border-color: #b7c9e323; }
+  .hc-dial-needle {
+    position: absolute;
+    inset: 24%;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    transform: rotate(0deg);
+    transition: transform .72s cubic-bezier(.19,.82,.24,1.12);
+    pointer-events: none;
+  }
+  .hc-dial-needle svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 2px 7px #f3c45f66); }
+  .hc-dial-core {
+    position: absolute;
+    inset: 38%;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    border: 1px solid #f3c45f9c;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 25%, #2b4058, #101b2d 76%);
+    color: var(--hc-gold);
+    box-shadow: 0 0 0 5px #f3c45f12, 0 7px 18px #0007;
+  }
+  .hc-dial-core span { font-family: "DM Serif Display", Georgia, serif; font-size: clamp(13px, 4vw, 18px); letter-spacing: .08em; }
+  .hc-dial-question {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    width: clamp(92px, 31%, 112px);
+    min-height: 45px;
+    padding: 6px 7px;
+    border: 1px solid #f3c45f66;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #1a2940f7, #101b2dfc);
+    color: var(--hc-cream);
+    font: inherit;
+    font-size: 10px;
+    line-height: 1.25;
+    text-align: center;
+    cursor: pointer;
+    transform: translate(-50%, -50%) rotate(var(--dial-angle)) translateY(var(--dial-offset)) rotate(var(--dial-counter));
+    transition: border-color .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
+  }
+  .hc-dial-question:hover, .hc-dial-question[aria-pressed="true"] {
+    border-color: var(--hc-gold);
+    background: #71384a;
+    color: #fffaf0;
+    box-shadow: 0 0 18px #f3c45f29;
+  }
+  .hc-dial-answer {
+    width: min(100%, 460px);
+    margin: 13px auto 0;
+    padding: 14px 16px;
+    border: 1px solid #f3c45f5c;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #1a2940, #101b2d);
+    box-shadow: 0 9px 24px #050b1538;
+  }
+  .hc-dial-answer[hidden] { display: none; }
+  .hc-dial-answer h3 { margin: 0 0 7px; color: var(--hc-gold); font-family: "DM Serif Display", Georgia, serif; font-size: 17px; font-weight: 400; }
+  .hc-dial-answer p { margin: 0; color: var(--hc-cream); font-size: 12px; line-height: 1.6; white-space: pre-wrap; }
+  .hc-dial-answer .hc-answer-detail { margin-top: 8px; color: var(--hc-muted); }
+  .hc-dial-answer .hc-result-actions { margin-top: 11px; }
+  .hc-people { margin: 20px 0 4px; }
+  .hc-people-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+  .hc-person {
+    padding: 13px;
+    border: 1px solid #b7c9e32b;
+    border-radius: 14px;
+    background: linear-gradient(145deg, #1a2940ed, #142136);
+  }
+  .hc-person-role { margin: 0 0 5px; color: var(--hc-gold); font-size: 9px; font-weight: 700; letter-spacing: .1em; }
+  .hc-person-name { margin: 0; color: var(--hc-cream); font-family: "DM Serif Display", Georgia, serif; font-size: 15px; font-weight: 400; }
+  .hc-person-bio { margin: 6px 0 8px; color: var(--hc-muted); font-size: 10px; line-height: 1.5; }
+  .hc-data-note { margin: 14px 0 0; color: #b7c9e3a6; font-size: 10px; line-height: 1.55; }
+  .hc-discovery {
+    clear: both;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: center;
+    margin: 19px 0 20px;
+    padding: 14px 15px;
+    overflow: hidden;
+    border: 1px solid #f3c45f55;
+    border-radius: 15px;
+    background: linear-gradient(112deg, #f3c45f14, #71384a24 72%, #1a2940);
+  }
+  .hc-discovery::before {
+    position: absolute;
+    top: -35px;
+    right: 20%;
+    width: 105px;
+    height: 105px;
+    border: 1px solid #f3c45f24;
+    border-radius: 50%;
+    content: "";
+    pointer-events: none;
+  }
+  .hc-discovery-copy { position: relative; min-width: 0; }
+  .hc-discovery-title { margin: 0 0 5px; color: var(--hc-gold); font-size: 11px; font-weight: 700; letter-spacing: .08em; }
+  .hc-discovery-text { margin: 0; color: var(--hc-cream); font-size: 12px; line-height: 1.45; }
+  .hc-text-button {
+    padding: 5px 0;
+    border: 0;
+    background: transparent;
+    color: var(--hc-gold);
+    font: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .hc-section-title { margin: 0 0 10px; color: var(--hc-muted); font-size: 10px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+  .hc-mode-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .hc-mode-card {
+    position: relative;
+    min-height: 116px;
+    padding: 13px;
+    border: 1px solid #b7c9e326;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #1a2940f2, #15243a);
+    color: var(--hc-cream);
+    text-align: left;
+    cursor: pointer;
+    transition: transform .18s ease, border-color .18s ease, background .18s ease;
+  }
+  .hc-mode-card:hover { transform: translateY(-2px); border-color: #f3c45f77; background: linear-gradient(145deg, #233650, #1a2940); }
+  .hc-mode-icon { display: block; margin-bottom: 8px; color: var(--hc-gold); font-size: 19px; line-height: 1; }
+  .hc-mode-name { display: block; margin-bottom: 4px; font-family: "DM Serif Display", Georgia, serif; font-size: 16px; }
+  .hc-mode-description { display: block; color: var(--hc-muted); font-size: 10px; line-height: 1.45; }
+  .hc-prompts { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 13px; }
+  .hc-prompts[hidden] { display: none !important; }
+  .hc-prompt {
+    min-height: 34px;
+    padding: 7px 10px;
+    border: 1px solid #b7c9e330;
+    border-radius: 18px;
+    background: #101b2d9c;
+    color: #e4eaf2;
+    font: inherit;
+    font-size: 10px;
+    cursor: pointer;
+    transition: border-color .18s ease, background .18s ease;
+  }
+  .hc-prompt:hover { border-color: #f3c45f77; background: #f3c45f12; }
+  .hc-note { margin: 15px 0 0; color: #b7c9e3a6; font-size: 10px; line-height: 1.5; }
+  .hc-chat-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 15px; }
+  .hc-chat-caption { color: var(--hc-muted); font-size: 11px; }
+  #rs-chat-window .hc-form { display: block; }
+  .hc-chat-log { display: flex; flex-direction: column; gap: 10px; }
+  .hc-message {
+    width: fit-content;
+    max-width: 94%;
+    padding: 11px 13px;
+    border: 1px solid #ffffff10;
+    border-radius: 14px 14px 14px 4px;
+    background: #1a2940;
+    color: var(--hc-cream);
+    font-size: 12px;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    animation: hc-enter .2s ease both;
+  }
+  .hc-message.user { align-self: flex-end; border-color: #f3c45f35; border-radius: 14px 14px 4px 14px; background: #71384a66; }
+  .hc-result-grid { display: grid; gap: 8px; margin: 0 0 9px; }
+  .hc-result-card {
+    padding: 12px;
+    border: 1px solid #f3c45f36;
+    border-radius: 13px;
+    background: linear-gradient(135deg, #1a2940, #17253a);
+    animation: hc-enter .2s ease both;
+  }
+  .hc-result-title { margin: 0; color: var(--hc-cream); font-family: "DM Serif Display", Georgia, serif; font-size: 16px; }
+  .hc-result-subtitle { margin: 4px 0 8px; color: var(--hc-muted); font-size: 10px; line-height: 1.45; }
+  .hc-result-meta { display: grid; gap: 3px; color: #e8eaf0; font-size: 10px; line-height: 1.45; }
+  .hc-result-meta strong { color: var(--hc-gold); font-weight: 600; }
+  .hc-result-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 9px; }
+  .hc-action {
+    min-height: 34px;
+    padding: 7px 11px;
+    border: 1px solid #f3c45f65;
+    border-radius: 9px;
+    background: #f3c45f16;
+    color: var(--hc-gold);
+    font: inherit;
+    font-size: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .hc-action:hover { background: #f3c45f29; }
+  .hc-typing { display: inline-flex; gap: 4px; }
+  .hc-typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--hc-gold); animation: rs-typing 1s infinite ease-in-out; }
+  .hc-typing span:nth-child(2) { animation-delay: .15s; }
+  .hc-typing span:nth-child(3) { animation-delay: .3s; }
+  #rs-chat-window .rs-chat-input-area.hc-input-area {
+    padding: 12px 17px max(13px, env(safe-area-inset-bottom));
+    border-top: 1px solid #f3c45f2c;
+    background: linear-gradient(145deg, #14243af5, #101b2df5);
+  }
+  .hc-input-label { display: block; margin-bottom: 7px; color: #b7c9e3a8; font-size: 10px; }
+  #rs-chat-input.hc-input {
+    min-height: 44px;
+    max-height: 104px;
+    padding: 11px 13px;
+    border: 1px solid #b7c9e340;
+    border-radius: 12px;
+    background: #f7f3ea;
+    color: #101b2d;
+    font-size: 12px;
+  }
+  #rs-chat-input.hc-input::placeholder { color: #63758b; }
+  #rs-chat-send.hc-send { width: 46px; min-height: 44px; border-radius: 12px; background: var(--hc-gold); }
+  .hc-footer { display: flex; justify-content: space-between; gap: 8px; margin-top: 8px; color: #b7c9e3a6; font-size: 9px; line-height: 1.4; }
+  .hc-footer a { color: var(--hc-muted); }
+  .hc-mode-card:focus-visible, .hc-prompt:focus-visible, .hc-action:focus-visible,
+  .hc-icon-button:focus-visible, .hc-text-button:focus-visible,
+  #rs-chat-window a:focus-visible, #rs-chat-input:focus-visible, #rs-chat-send:focus-visible {
+    outline: 2px solid var(--hc-gold);
+    outline-offset: 3px;
+  }
+  @keyframes hc-enter { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes hc-needle-turn { to { transform: rotate(360deg); } }
+  @media (max-width: 900px) and (min-width: 601px) {
+    #rs-chat-button { right: max(20px, env(safe-area-inset-right)); left: auto; }
+    #rs-chat-window { top: max(16px, env(safe-area-inset-top)); right: auto; bottom: max(16px, env(safe-area-inset-bottom)); left: 50%; width: min(720px, calc(100vw - 32px)); max-width: min(720px, calc(100vw - 32px)); height: auto; max-height: calc(100dvh - 32px); }
+  }
+  @media (max-width: 600px) {
+    #rs-chat-button { right: max(15px, env(safe-area-inset-right)); bottom: max(17px, env(safe-area-inset-bottom)); width: 60px; height: 60px; left: auto; }
+    .hc-launcher-compass { width: 38px; height: 38px; }
+    .hc-launcher-label { right: 69px; }
+    #rs-chat-window {
+      top: max(8px, env(safe-area-inset-top));
+      right: max(8px, env(safe-area-inset-right));
+      bottom: max(8px, env(safe-area-inset-bottom));
+      left: max(8px, env(safe-area-inset-left));
+      width: auto;
+      max-width: none;
+      height: auto;
+      max-height: none;
+      border-radius: 21px;
+      transform: translateY(18px) scale(.96);
+      transform-origin: center bottom;
+    }
+    #rs-chat-window.rs-open { transform: translateY(0) scale(1); }
+    .rs-chat-header.hc-header { min-height: 68px; padding: 11px 13px; }
+    .hc-brand-mark { width: 39px; height: 39px; flex-basis: 39px; }
+    #rs-chat-messages.hc-main { padding: 17px 15px; }
+    .hc-welcome-title { font-size: clamp(23px, 7vw, 30px); }
+    .hc-mode-card { min-height: 112px; padding: 11px; }
+    .hc-mode-description { font-size: 9px; }
+    .hc-discovery { padding: 12px; }
+    .hc-footer { font-size: 8px; }
+    .hc-dial { width: min(100%, 330px); }
+    .hc-people-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 360px) {
+    #rs-chat-messages.hc-main { padding: 14px 12px; }
+    .hc-mode-grid { gap: 7px; }
+    .hc-mode-card { min-height: 112px; padding: 9px; }
+    .hc-mode-name { font-size: 14px; }
+    .hc-discovery { grid-template-columns: 1fr; gap: 4px; }
+    .hc-dial { --dial-offset: -31cqw; }
+    .hc-dial-question { width: clamp(72px, 35%, 88px); min-height: 42px; font-size: 9px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #rs-chat-button, #rs-chat-window, #rs-chat-window *,
+    #rs-chat-window *::before, #rs-chat-window *::after {
+      scroll-behavior: auto !important;
+      animation-duration: .01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+  }
+  .hc-site-home-link {
+    position: fixed;
+    top: max(16px, env(safe-area-inset-top));
+    left: max(16px, env(safe-area-inset-left));
+    z-index: 9998;
+    padding: 9px 13px;
+    border: 1px solid #a9c9e27a;
+    border-radius: 999px;
+    background: #102b46e8;
+    color: #f5f8fc;
+    font: 500 12px "DM Sans", "Segoe UI", Arial, sans-serif;
+    text-decoration: none;
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+  .hc-site-home-link:hover { border-color: #d5c18f; }
+  .hc-site-home-link:focus-visible { outline: 2px solid #c2d9ec; outline-offset: 3px; }
+  body.hc-embedded { min-width: 0; min-height: 0; overflow: hidden; background: transparent; }
+  body.hc-embedded .hc-site-home-link,
+  body.hc-embedded #hc-scrim { display: none; }
+  body.hc-embedded #rs-chat-button {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: 66px;
+    height: 66px;
+    padding: 0;
+    border-radius: 50%;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  body.hc-embedded #rs-chat-button::after { display: none; }
+  body.hc-embedded #rs-chat-button[aria-expanded="true"] { visibility: hidden; pointer-events: none; }
+  body.hc-embedded #rs-chat-window {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    border-radius: 22px;
+    background: #101b2d;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    transform: translateY(14px) scale(.985);
+    transform-origin: bottom right;
+  }
+  body.hc-embedded #rs-chat-window.rs-open { transform: translateY(0) scale(1); }
+</style>
+
+</head>
+<body>
+<a class="hc-site-home-link" href="index.html">← Back to Roundsquare</a>
+<button id="rs-chat-button" aria-label="Open Happiness Compass" aria-expanded="false" aria-controls="rs-chat-window">
+  <span class="hc-launcher-compass" aria-hidden="true">
+    <svg viewBox="0 0 48 48" fill="none">
+      <circle cx="24" cy="24" r="20" stroke="#F3C45F" stroke-width="1.2"/>
+      <circle cx="24" cy="24" r="15" stroke="#F3C45F" stroke-opacity=".38"/>
+      <path d="M24 7v4M24 37v4M7 24h4M37 24h4" stroke="#F3C45F" stroke-width="1.4"/>
+      <path d="m29.5 18.5-3.8 8.2-7.2 3.2 3.2-7.2 7.8-4.2Z" fill="#F3C45F"/>
+      <path d="m21.7 22.7 4 4" stroke="#101B2D" stroke-width="1.2"/>
+      <circle cx="24" cy="24" r="2" fill="#F7F3EA"/>
+    </svg>
+  </span>
+  <span class="hc-launcher-label">Happiness Compass</span>
+</button>
+
+<div id="hc-scrim" aria-hidden="true"></div>
+
+<section id="rs-chat-window" role="dialog" aria-label="The Happiness Compass" aria-modal="true" aria-hidden="true">
+  <header class="rs-chat-header hc-header">
+    <div class="hc-brand-mark"><img src="./Images/roundsquarelogo.jpeg" alt="Round Square"></div>
+    <div class="hc-brand-name">
+      <strong>THE HAPPINESS COMPASS</strong>
+      <small>Round Square · Pursuit of Happiness 2026</small>
+    </div>
+    <div class="hc-header-actions">
+      <button type="button" class="hc-icon-button" id="hc-back-button" aria-label="Go back" hidden>Back</button>
+      <button type="button" class="hc-icon-button" id="hc-home-button" aria-label="Go to Compass home" hidden>Home</button>
+      <button type="button" class="hc-icon-button" id="rs-chat-close" aria-label="Close Happiness Compass">×</button>
+    </div>
+  </header>
+
+  <main id="rs-chat-messages" class="hc-main">
+    <section class="hc-home" id="hc-home">
+      <div class="hc-compass-seal" aria-hidden="true">
+        <svg viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="32" r="27" stroke="#F3C45F" stroke-opacity=".55"/>
+          <circle cx="32" cy="32" r="21" stroke="#F3C45F" stroke-opacity=".28"/>
+          <path d="m42 19-6.3 15.7L22 42l5.8-14.1L42 19Z" fill="#F3C45F"/>
+          <path d="m27.8 27.9 8.1 7.4" stroke="#101B2D" stroke-width="1.4"/>
+          <circle cx="32" cy="32" r="2.2" fill="#F7F3EA"/>
+          <path d="M32 1v5M32 58v5M1 32h5M58 32h5" stroke="#F3C45F"/>
+        </svg>
+      </div>
+      <p class="hc-eyebrow">Pursuit of Happiness · Dubai</p>
+      <h1 class="hc-welcome-title">THE HAPPINESS COMPASS</h1>
+      <p class="hc-welcome-question">Where will you discover happiness?</p>
+      <p class="hc-intro">Your personal guide to people, places and possibilities at Round Square 2026.</p>
+
+      <section class="hc-dial-wrap" aria-label="Interactive event question compass">
+        <p class="hc-dial-caption">Choose a question · let the compass guide you</p>
+        <div class="hc-dial" id="hc-dial">
+          <div class="hc-dial-rim" aria-hidden="true"></div>
+          <div class="hc-dial-needle" id="hc-dial-needle" aria-hidden="true">
+            <svg viewBox="0 0 100 100" fill="none">
+              <path d="M50 7 61 50 50 43 39 50 50 7Z" fill="#F3C45F"/>
+              <path d="M50 93 39 50 50 57 61 50 50 93Z" fill="#B7C9E3"/>
+              <circle cx="50" cy="50" r="4" fill="#F7F3EA"/>
+            </svg>
+          </div>
+          <div class="hc-dial-core" aria-hidden="true"><span>RS</span></div>
+          <button type="button" class="hc-dial-question" data-dial-question="What does Khushi mean?" style="--dial-angle:0deg;--dial-counter:0deg" aria-pressed="false">What does Khushi mean?</button>
+          <button type="button" class="hc-dial-question" data-dial-question="Who are the speakers?" style="--dial-angle:60deg;--dial-counter:-60deg" aria-pressed="false">Who are the speakers?</button>
+          <button type="button" class="hc-dial-question" data-dial-question="What is happening next?" style="--dial-angle:120deg;--dial-counter:-120deg" aria-pressed="false">What is happening next?</button>
+          <button type="button" class="hc-dial-question" data-dial-question="Explore all Barazas" style="--dial-angle:180deg;--dial-counter:-180deg" aria-pressed="false">Explore Barazas · 16 listed</button>
+          <button type="button" class="hc-dial-question" data-dial-question="What are the six IDEALS?" style="--dial-angle:240deg;--dial-counter:-240deg" aria-pressed="false">What are the six IDEALS?</button>
+          <button type="button" class="hc-dial-question" data-dial-question="Show me the latest announcements" style="--dial-angle:300deg;--dial-counter:-300deg" aria-pressed="false">Latest announcements</button>
+        </div>
+        <section class="hc-dial-answer" id="hc-dial-answer" aria-live="polite" aria-atomic="true" hidden>
+          <h3 id="hc-dial-answer-title"></h3>
+          <p id="hc-dial-answer-text"></p>
+          <div id="hc-dial-answer-details"></div>
+          <div class="hc-result-actions" id="hc-dial-answer-actions"></div>
+        </section>
+      </section>
+
+      <section class="hc-discovery" aria-labelledby="hc-discovery-title">
+        <div class="hc-discovery-copy">
+          <p class="hc-discovery-title" id="hc-discovery-title">✦ ONE LITTLE DISCOVERY</p>
+          <p class="hc-discovery-text" id="hc-discovery-text"></p>
+        </div>
+        <button type="button" class="hc-text-button" id="hc-discover-more">Discover more →</button>
+      </section>
+
+      <h2 class="hc-section-title">Choose your direction</h2>
+      <div class="hc-mode-grid">
+        <button type="button" class="hc-mode-card" data-mode="way">
+          <span class="hc-mode-icon" aria-hidden="true">⌖</span>
+          <span class="hc-mode-name">Find My Way</span>
+          <span class="hc-mode-description">Find your Baraza, discover event information, and navigate the website.</span>
+        </button>
+        <button type="button" class="hc-mode-card" data-mode="next">
+          <span class="hc-mode-icon" aria-hidden="true">◷</span>
+          <span class="hc-mode-name">What's Next?</span>
+          <span class="hc-mode-description">Discover the published sessions and what's happening around you.</span>
+        </button>
+        <button type="button" class="hc-mode-card" data-mode="cultures">
+          <span class="hc-mode-icon" aria-hidden="true">✳</span>
+          <span class="hc-mode-name">Explore Cultures</span>
+          <span class="hc-mode-description">Discover the words, languages, and communities that make our event special.</span>
+        </button>
+        <button type="button" class="hc-mode-card" data-mode="surprise">
+          <span class="hc-mode-icon" aria-hidden="true">✧</span>
+          <span class="hc-mode-name">Surprise Me</span>
+          <span class="hc-mode-description">Take a little detour and discover something unexpected.</span>
+        </button>
+      </div>
+
+      <section class="hc-people" aria-labelledby="hc-people-title">
+        <h2 class="hc-section-title" id="hc-people-title">People to Meet</h2>
+        <div class="hc-people-grid" id="hc-people-grid"></div>
+      </section>
+
+      <div class="hc-prompts" aria-label="Suggested questions">
+        <button type="button" class="hc-prompt" data-ask="Explore all Barazas">Explore all Barazas</button>
+        <button type="button" class="hc-prompt" data-ask="Find my Baraza">Find my Baraza</button>
+        <button type="button" class="hc-prompt" data-ask="Show me the event schedule">View event information</button>
+        <button type="button" class="hc-prompt" data-ask="Find a venue">Find a venue</button>
+        <button type="button" class="hc-prompt" data-ask="Show me the upcoming session">Upcoming sessions</button>
+        <button type="button" class="hc-prompt" data-ask="Tell me about the speakers">Explore speakers</button>
+        <button type="button" class="hc-prompt" data-ask="Show me the latest announcements">Announcements</button>
+        <button type="button" class="hc-prompt" data-ask="What does Furaha mean?">What does Furaha mean?</button>
+        <button type="button" class="hc-prompt" data-ask="Explore the Junior Barazas">Junior Barazas</button>
+        <button type="button" class="hc-prompt" data-ask="Discover the Senior Barazas">Senior Barazas</button>
+      </div>
+      <p class="hc-data-note">Verified event details only. This page has no connected AI, live announcements feed, admin data source, or published speaker-session links.</p>
+    </section>
+
+    <section class="hc-chat-view" id="hc-chat-view" hidden>
+      <div class="hc-chat-top">
+        <span class="hc-chat-caption">Your Round Square journey</span>
+        <button type="button" class="hc-text-button" id="rs-clear-chat">Clear conversation</button>
+      </div>
+      <div class="hc-chat-log" id="hc-chat-log" aria-live="polite" aria-relevant="additions"></div>
+      <div class="hc-prompts" id="hc-suggested" aria-label="Suggested questions">
+        <button type="button" class="hc-prompt" data-ask="Who leads Furaha?">Who leads Furaha?</button>
+        <button type="button" class="hc-prompt" data-ask="Where can I find the schedule?">Where is the schedule?</button>
+        <button type="button" class="hc-prompt" data-ask="Show me the Intermediate Barazas">Intermediate Barazas</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="rs-chat-input-area hc-input-area">
+    <form class="hc-form" id="rs-chat-form">
+      <label class="hc-input-label" for="rs-chat-input">Ask the Compass</label>
+      <div class="rs-chat-form">
+        <textarea id="rs-chat-input" class="hc-input" placeholder="Ask me about your Round Square journey…" aria-label="Ask me about your Round Square journey" maxlength="500" rows="1"></textarea>
+        <button id="rs-chat-send" class="hc-send" type="submit" aria-label="Send message">➤</button>
+      </div>
+    </form>
+    <div class="hc-footer">
+      <span>Event guide · Verified local information</span>
+      <a href="mailto:roundsquaresupport.ihs@gmail.com">Ask an organiser</a>
+    </div>
+  </div>
+</section>
+
+<script>
+(() => {
+  "use strict";
+
+  const embeddedInDashboard = new URLSearchParams(window.location.search).get("embed") === "dashboard";
+  if (embeddedInDashboard) document.body.classList.add("hc-embedded");
+
+  const button = document.getElementById("rs-chat-button");
+  const scrim = document.getElementById("hc-scrim");
+  const panel = document.getElementById("rs-chat-window");
+  const close = document.getElementById("rs-chat-close");
+  const backButton = document.getElementById("hc-back-button");
+  const homeButton = document.getElementById("hc-home-button");
+  const homeView = document.getElementById("hc-home");
+  const chatView = document.getElementById("hc-chat-view");
+  const messages = document.getElementById("rs-chat-messages");
+  const log = document.getElementById("hc-chat-log");
+  const form = document.getElementById("rs-chat-form");
+  const input = document.getElementById("rs-chat-input");
+  const send = document.getElementById("rs-chat-send");
+  const discoveryText = document.getElementById("hc-discovery-text");
+  const discoverMore = document.getElementById("hc-discover-more");
+  const clear = document.getElementById("rs-clear-chat");
+  const dialNeedle = document.getElementById("hc-dial-needle");
+  const dialAnswer = document.getElementById("hc-dial-answer");
+  const dialAnswerTitle = document.getElementById("hc-dial-answer-title");
+  const dialAnswerText = document.getElementById("hc-dial-answer-text");
+  const dialAnswerDetails = document.getElementById("hc-dial-answer-details");
+  const dialAnswerActions = document.getElementById("hc-dial-answer-actions");
+  const peopleGrid = document.getElementById("hc-people-grid");
+  const supportEmail = "roundsquaresupport.ihs@gmail.com";
+
+  if (!button || !scrim || !panel || !close || !backButton || !homeButton || !homeView || !chatView ||
+      !messages || !log || !form || !input || !send || !discoveryText ||
+      !discoverMore || !clear || !dialNeedle || !dialAnswer || !dialAnswerTitle ||
+      !dialAnswerText || !dialAnswerDetails || !dialAnswerActions || !peopleGrid) return;
+
+  const BARAZAS = [
+    { word: "Furaha", language: "Swahili", level: "Junior (5–7)", ribbon: "Gold", head: "Bhavya Sharma 10G", co: ["Krithika Krishna 9E", "Aanchal Nikesh"] },
+    { word: "Felicità", language: "Italian", level: "Junior (5–7)", ribbon: "White", head: "Priyal Tyagi 11 SCI C", co: ["Stefania Susan Mathew 9C"] },
+    { word: "Sa'ada (سعادة)", language: "Arabic", level: "Junior (5–7)", ribbon: "Grey", head: "Mayukha Preman 12 SCI A", co: ["Neerad Krishna 9", "Kashinanth"] },
+    { word: "Sukham (सुखम्)", language: "Sanskrit", level: "Junior (5–7)", ribbon: "Green", head: "Yogit Myneni 10", co: ["Anya Anoop 10C"] },
+    { word: "Gaudium", language: "Latin", level: "Junior (5–7)", ribbon: "Yellow", head: "Kashish Wadhwani 12 COM C", co: ["Khwaish Panjabi 11/12 Com D", "Aarav Pratap 9"] },
+    { word: "Khushi (खुशी)", language: "Hindi", level: "Junior (5–7)", ribbon: "Blue", head: "Vedanth Oolath", co: ["Jashna Bhatia", "Sreelakshmi"] },
+    { word: "Glück", language: "German", level: "Intermediate (8–9)", ribbon: "Orange", head: "Mahadevan Surya 10M", co: ["Aarav Garg 10L", "Rudra Jasnani 12 SCI I"] },
+    { word: "Bonheur", language: "French", level: "Intermediate (8–9)", ribbon: "Black", head: "Khadeeja Sheza 12 COM A", co: ["Niranjana Anusree 9D", "Shaanvi Himanshu"] },
+    { word: "Schastye (Счастье)", language: "Russian", level: "Intermediate (8–9)", ribbon: "Dark Blue", head: "Arnav Burade 11 SCI I", co: ["Irene Andrews 12 SCI E", "Arya Suresh Nair"] },
+    { word: "Shiawase (幸せ)", language: "Japanese", level: "Intermediate (8–9)", ribbon: "Red", head: "Ishanshi Vegad 11 SCI A", co: ["Ananya Rane 11 SCI B", "Vadani"] },
+    { word: "Felicidad", language: "Spanish", level: "Intermediate (8–9)", ribbon: "Light Green", head: "Hyfa Maryam 10C", co: ["Aditya Saini 9M", "Zaid Khan 10J"] },
+    { word: "Geluk", language: "Afrikaans", level: "Intermediate (8–9)", ribbon: null, head: "Ayaan Mustafa Ali 12 SCI K", co: ["Harshita Kaithwas", "Aadiya Pramod"] },
+    { word: "Eftychia (Ευτυχία)", language: "Greek", level: "Intermediate (8–9)", ribbon: "Brown", head: "Vaishnavi Vinod 12 COM C", co: ["Abi Tameem Suratwala", "Emilia Susan 10B"] },
+    { word: "Xingfu (幸福)", language: "Mandarin Chinese", level: "Senior (10–12)", ribbon: "Purple", head: "Arnav Payyaram 12 COM B", co: ["Rohan Reddy", "Diya Deepak"] },
+    { word: "Saya", language: "Tagalog", level: "Senior (10–12)", ribbon: "Maroon", head: "Vamika Handa 10B", co: ["Jovino Joji 11 SCI I", "Abijithrajan.B"] },
+    { word: "Koa", language: "Maori", level: "Senior (10–12)", ribbon: "Silver", head: "Ram Prasad 12 COM F", co: ["Mishti Shetty 12 COM B", "Yug Mehta 12 Com E"] },
+    { word: "Felicidade", language: "Portuguese", level: "Senior (10–12)", ribbon: "Turquoise", head: "Tiana Paul 10C", co: ["Manit Jatwani 12 COM F", "Sarah Hussain 11 SCI D"] }
+  ];
+
+  const ribbonLabel = item => item.ribbon ? item.ribbon + " ribbon" : "";
+  const barazaSummary = (item, includeLevel = true) => [
+    item.word,
+    item.language,
+    ...(includeLevel ? [item.level] : []),
+    ribbonLabel(item)
+  ].filter(Boolean).join(" · ");
+  const barazaDescription = item => [
+    item.word + " is listed as the " + item.language + " happiness word for " + item.level + ".",
+    item.ribbon ? "Its ribbon is " + item.ribbon + "." : "",
+    "Head leader: " + item.head + ".",
+    item.co.length ? "Co-Baraza Leader" + (item.co.length > 1 ? "s" : "") + ": " + item.co.join(", ") + "." : ""
+  ].filter(Boolean).join(" ");
+
+  const BARAZA_LEADERS = [
+    { name: "King Constantine", grades: "Grades 5–6" },
+    { name: "Roy McComish", grades: "Grades 7–8" },
+    { name: "Kurt Hahn", grades: "Grades 9–11" }
+  ];
+
+  const PEOPLE = [
+    {
+      name: "Punit MK Vasu",
+      role: "HEAD OF SCHOOL",
+      bio: "Leading The Indian High Group of Schools with a focus on inclusive, innovative and meaningful education."
+    },
+    {
+      name: "Dr. Abhilasha Chaube",
+      role: "ROUND SQUARE REPRESENTATIVE",
+      bio: "Creating engaging student experiences through Round Square initiatives, MUN and multicultural programmes."
+    }
+  ];
+
+  const IDEALS = [
+    "Internationalism",
+    "Democracy",
+    "Environmentalism",
+    "Adventure",
+    "Leadership",
+    "Service"
+  ];
+
+  const ANNOUNCEMENTS = [];
+
+  PEOPLE.forEach(person => {
+    const profile = document.createElement("article");
+    profile.className = "hc-person";
+    const role = document.createElement("p");
+    role.className = "hc-person-role";
+    role.textContent = person.role;
+    const name = document.createElement("h3");
+    name.className = "hc-person-name";
+    name.textContent = person.name;
+    const bio = document.createElement("p");
+    bio.className = "hc-person-bio";
+    bio.textContent = person.bio;
+    const explore = document.createElement("button");
+    explore.type = "button";
+    explore.className = "hc-text-button";
+    explore.dataset.ask = "Tell me about " + person.name;
+    explore.textContent = "Explore profile →";
+    profile.append(role, name, bio, explore);
+    peopleGrid.appendChild(profile);
+  });
+
+  const EVENT = {
+    date: "17 October 2026",
+    venue: "The Indian High School, Dubai",
+    timezone: "Dubai local time (GST, UTC+4)",
+    schedule: {
+      junior: "Junior schedule — 17 October 2026 (Dubai local time, GST/UTC+4): 9:00–9:30 AM registration; 9:30–10:30 opening ceremony; 10:30–11:40 scavenger hunt; 11:40 AM–12:40 PM Baraza Session 1; 12:40–1:30 lunch; 1:30–2:00 keynote speaker; 2:00–2:30 creative expression session; 2:30–3:00 photo sessions; 3:00–4:30 Baraza Session 2; 4:30 PM team dance; 5:45 PM dispersal.",
+      intermediate: "Intermediate and Senior schedule — 17 October 2026 (Dubai local time, GST/UTC+4): 9:00–9:30 AM registration; 9:30–10:30 opening ceremony; 10:30 AM–12:40 PM Baraza Session 1; 12:40–1:30 lunch; 1:30–2:00 keynote speaker; 2:00–2:30 creative expression session; 2:30–3:00 photo sessions; 3:00–4:30 Baraza Session 2; 4:30 PM team dance; 5:45 PM dispersal."
+    },
+    links: {
+      itinerary: "./assets/Roundsquare%20itinerary%2C%20Oct%202026%20(2).pdf",
+      handbook: "./assets/Pursuit%20of%20Happiness%20%E2%80%94%20Handbook-selection%20(2).pdf"
+    }
+  };
+
+  const FAQ = [
+    { keys: ["junior schedule", "junior timetable"], answer: EVENT.schedule.junior, link: "itinerary" },
+    { keys: ["intermediate schedule", "senior schedule", "intermediate timetable", "senior timetable"], answer: EVENT.schedule.intermediate, link: "itinerary" },
+    { keys: ["schedule", "agenda", "timetable", "programme", "program", "upcoming session", "what is happening next", "what's next", "next session", "when", "timing", "event date"], answer: "The published itinerary includes registration, opening ceremony, Baraza sessions, lunch, keynote, creative expression, photo session, team dance and dispersal. I can't reliably identify what's happening now or next from this page, but you can browse the full published timetable.", link: "itinerary" },
+    { keys: ["venue", "location", "address", "map", "direction", "where", "campus"], answer: "The conference takes place at The Indian High School, Dubai. A specific room or campus entrance is not listed here; please check the handbook or ask an organiser.", link: "handbook" },
+    { keys: ["dress", "clothes", "wear", "uniform", "outfit", "formal", "id card", "student id", "school id"], answer: "Strict formal dress is required. Bring your student ID card; students without an ID card will not be allowed to enter the campus.", link: "handbook" },
+    { keys: ["food", "meal", "breakfast", "lunch", "dinner", "tiffin", "dietary", "allergy", "allergies", "vegetarian", "vegan"], answer: "Lunch is not provided. Please bring your own tiffin box. For specific dietary or allergy questions, check with an organiser.", contact: true, link: "handbook" },
+    { keys: ["transport", "bus", "parking", "taxi", "travel", "pickup", "pick up", "drop", "route", "commute"], answer: "Transport is not provided on the conference day. Please arrange your own travel to and from The Indian High School, Dubai. Parking and pickup details are not listed here.", link: "handbook" },
+    { keys: ["contact", "email", "organizer", "organiser", "help", "support", "phone", "reach"], answer: "For conference questions, email the organising team at roundsquaresupport.ihs@gmail.com.", contact: true },
+    { keys: ["register", "registration", "sign up", "signup", "fee", "payment", "cost", "price"], answer: "Participation is free. Registration closes on 13 October at 11:59 PM. Use the official delegate registration form shared with students; ask an organiser if you need help.", contact: true, link: "handbook" },
+    { keys: ["rules", "policy", "allowed", "permission", "bring", "required", "what do i need", "what should i", "items"], answer: "Bring your student ID card and your own tiffin box. Strict formal dress is required. Students without an ID card will not be allowed to enter the campus.", link: "handbook" },
+    { keys: ["parent", "parents", "mother", "father"], answer: "Parents are welcome to join as delegates and will have separate Baraza discussions and activities throughout the day.", link: "handbook" },
+    { keys: ["orientation", "induction"], answer: "A delegate orientation will be held in the auditorium next week. Further details will be shared later; email the organising team if you need help.", contact: true, link: "handbook" }
+  ];
+
+  const discoveries = BARAZAS.map(item => ({
+    text: [item.word, item.language, ribbonLabel(item)].filter(Boolean).join(" · "),
+    action: item.word
+  }));
+  let shownDiscoveries = new Set();
+  let responseTimer = null;
+  let dialResponseTimer = null;
+  let dialRotation = 0;
+  let typingMessage = null;
+  let waiting = false;
+
+  function normalize(text) {
+    return text.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  }
+
+  function addMessage(text, who) {
+    const message = document.createElement("div");
+    message.className = "hc-message" + (who === "user" ? " user" : "");
+    message.textContent = text;
+    log.appendChild(message);
+    scrollToLatest();
+    return message;
+  }
+
+  function addResultCard(title, subtitle, details, actions) {
+    const card = document.createElement("article");
+    card.className = "hc-result-card";
+    const heading = document.createElement("h3");
+    heading.className = "hc-result-title";
+    heading.textContent = title;
+    card.appendChild(heading);
+    if (subtitle) {
+      const sub = document.createElement("p");
+      sub.className = "hc-result-subtitle";
+      sub.textContent = subtitle;
+      card.appendChild(sub);
+    }
+    const metadata = document.createElement("div");
+    metadata.className = "hc-result-meta";
+    details.forEach(([label, value]) => {
+      if (!value) return;
+      const line = document.createElement("div");
+      const strong = document.createElement("strong");
+      strong.textContent = label + ": ";
+      line.append(strong, document.createTextNode(value));
+      metadata.appendChild(line);
+    });
+    card.appendChild(metadata);
+    const actionRow = document.createElement("div");
+    actionRow.className = "hc-result-actions";
+    actions.forEach(action => {
+      if (action.href) {
+        const link = document.createElement("a");
+        link.className = "hc-action";
+        link.href = action.href;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = action.label;
+        actionRow.appendChild(link);
+      } else {
+        const control = document.createElement("button");
+        control.type = "button";
+        control.className = "hc-action";
+        control.textContent = action.label;
+        control.addEventListener("click", action.run);
+        actionRow.appendChild(control);
+      }
+    });
+    if (actions.length) card.appendChild(actionRow);
+    log.appendChild(card);
+    scrollToLatest();
+  }
+
+  function barazaCard(item) {
+    addResultCard(item.word, item.language + " · " + item.level, [
+      ...(item.ribbon ? [["Ribbon", item.ribbon]] : []),
+      ["Head Baraza Leader", item.head],
+      ...(item.co.length ? [["Co-Baraza Leader" + (item.co.length > 1 ? "s" : ""), item.co.join(", ")]] : [])
+    ], [{
+      label: "Open Baraza",
+      run: () => {
+        addMessage(barazaDescription(item), "bot");
+      }
+    }]);
+  }
+
+  function addResourceCard(label, resource) {
+    addResultCard(label, "Published event resource", [], [
+      { label: resource === "itinerary" ? "View Schedule" : "Open Handbook", href: EVENT.links[resource] }
+    ]);
+  }
+
+  function addDialAction(label, run) {
+    const action = document.createElement("button");
+    action.type = "button";
+    action.className = "hc-action";
+    action.textContent = label;
+    action.addEventListener("click", run);
+    dialAnswerActions.appendChild(action);
+  }
+
+  function addDialResource(label, resource) {
+    const link = document.createElement("a");
+    link.className = "hc-action";
+    link.href = EVENT.links[resource];
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = label;
+    dialAnswerActions.appendChild(link);
+  }
+
+  function answerDialQuestion(question, index) {
+    if (dialResponseTimer !== null) window.clearTimeout(dialResponseTimer);
+    panel.querySelectorAll("[data-dial-question]").forEach((choice, choiceIndex) => {
+      choice.setAttribute("aria-pressed", String(choiceIndex === index));
+    });
+    dialRotation += 360 + ((index * 60 - (dialRotation % 360) + 360) % 360);
+    dialNeedle.style.transform = "rotate(" + dialRotation + "deg)";
+    dialAnswer.hidden = false;
+    dialAnswerTitle.textContent = question;
+    dialAnswerText.textContent = "Finding the verified event details…";
+    dialAnswerDetails.replaceChildren();
+    dialAnswerActions.replaceChildren();
+    dialResponseTimer = window.setTimeout(() => {
+      dialResponseTimer = null;
+      const result = findAnswer(question);
+      dialAnswerText.textContent = result.answer;
+
+      const details = [];
+      if (result.baraza) {
+        details.push(barazaSummary(result.baraza));
+        details.push("Head Baraza Leader: " + result.baraza.head);
+        if (result.baraza.co.length) details.push("Co-Baraza Leader" + (result.baraza.co.length > 1 ? "s" : "") + ": " + result.baraza.co.join(", "));
+        addDialAction("Open Baraza", () => {
+          setChatMode();
+          appendResult(result);
+        });
+      }
+      if (result.barazas) {
+        details.push(result.barazas.map(item => barazaSummary(item)).join("\n"));
+        addDialAction("Explore Barazas", () => {
+          setChatMode();
+          appendResult(result);
+        });
+      }
+      if (result.leaders) {
+        details.push(result.leaders.map(item => item.name + " — " + item.grades).join("\n"));
+      }
+      if (result.ideals) details.push(result.ideals.join(" · "));
+      if (result.people) {
+        result.people.forEach(person => {
+          details.push(person.name + " — " + person.role + ". " + person.bio);
+          addDialAction("Explore " + person.name, () => {
+            setChatMode();
+            appendResult({ answer: "Published event profile:", people: [person] });
+          });
+        });
+      }
+      if (result.announcements) {
+        result.announcements.forEach(item => details.push(item.title + (item.body ? " — " + item.body : "")));
+      }
+      if (details.length) {
+        const detail = document.createElement("p");
+        detail.className = "hc-answer-detail";
+        detail.textContent = details.join("\n");
+        dialAnswerDetails.appendChild(detail);
+      }
+      if (result.link) addDialResource(result.link === "itinerary" ? "View Schedule" : "Open Handbook", result.link);
+      if (result.extraLink) addDialResource("Open Handbook", result.extraLink);
+      if (result.contact) {
+        const email = document.createElement("a");
+        email.className = "hc-action";
+        email.href = "mailto:" + supportEmail;
+        email.textContent = "Ask an organiser";
+        dialAnswerActions.appendChild(email);
+      }
+      const answerOffset = dialAnswer.getBoundingClientRect().top - messages.getBoundingClientRect().top;
+      messages.scrollTo({ top: messages.scrollTop + answerOffset, behavior: "smooth" });
+    }, 260);
+  }
+
+  function showBarazas(items, intro) {
+    addMessage(intro, "bot");
+    const grid = document.createElement("div");
+    grid.className = "hc-result-grid";
+    log.appendChild(grid);
+    items.forEach(item => {
+      const card = document.createElement("article");
+      card.className = "hc-result-card";
+      const heading = document.createElement("h3");
+      heading.className = "hc-result-title";
+      heading.textContent = item.word;
+      const subtitle = document.createElement("p");
+      subtitle.className = "hc-result-subtitle";
+      subtitle.textContent = barazaSummary(item, false);
+      const action = document.createElement("button");
+      action.type = "button";
+      action.className = "hc-action";
+      action.textContent = "Open Baraza";
+      action.addEventListener("click", () => {
+        addMessage(barazaDescription(item), "bot");
+      });
+      card.append(heading, subtitle, action);
+      grid.appendChild(card);
+    });
+    scrollToLatest();
+  }
+
+  function matchBarazas(question) {
+    const q = normalize(question);
+    return BARAZAS.filter(item => normalize(item.word).split(/[()]/).some(part => {
+      const name = part.trim();
+      return name.length > 2 && q.includes(name);
+    }));
+  }
+
+  function getBarazaByName(name) {
+    const target = normalize(name);
+    return BARAZAS.find(item => normalize(item.word) === target || normalize(item.word).startsWith(target));
+  }
+
+  function findAnswer(question) {
+    const q = normalize(question).replace(/[^\p{L}\p{N}\s']/gu, " ").trim();
+    const matches = matchBarazas(q);
+    if (matches.length) {
+      const requestedLevel = /\bsenior\b/.test(q) ? "Senior" : (/\bintermediate\b/.test(q) ? "Intermediate" : (/\bjunior\b/.test(q) ? "Junior" : ""));
+      const levelMatches = requestedLevel ? matches.filter(item => item.level.startsWith(requestedLevel)) : matches;
+      if (levelMatches.length > 1) {
+        return { answer: "More than one Baraza matches that word in the supplied records:", barazas: levelMatches };
+      }
+      const item = levelMatches[0] || matches[0];
+      const asksLeaders = /\b(who|leader|leads|head|co leader|co leaders)\b/.test(q);
+      if (asksLeaders) {
+        return {
+          answer: item.word + " — Head Baraza Leader: " + item.head + (item.co.length ? ". Co-Baraza Leader" + (item.co.length > 1 ? "s" : "") + ": " + item.co.join(", ") : "") + ".",
+          baraza: item
+        };
+      }
+      if (/\b(mean|meaning|language|word)\b/.test(q)) {
+        return {
+          answer: item.word + " is listed as a word for “Happiness” in " + item.language + ". The event information provides the language and word, but no further translation or cultural explanation.",
+          baraza: item
+        };
+      }
+      return { answer: barazaSummary(item) + ".", baraza: item };
+    }
+
+    if (/\b(junior|intermediate|senior)\b/.test(q) && /\b(baraza|barazas|group|level)\b/.test(q)) {
+      const level = /\bsenior\b/.test(q) ? "Senior" : (/\bintermediate\b/.test(q) ? "Intermediate" : "Junior");
+      return { answer: level + " Barazas:", barazas: BARAZAS.filter(item => item.level.startsWith(level)) };
+    }
+    const languageMatches = BARAZAS.filter(item => q.includes(normalize(item.language)));
+    if (languageMatches.length && /\b(baraza|barazas|group|show|explore|list)\b/.test(q)) {
+      return { answer: "Barazas listed for that language:", barazas: languageMatches };
+    }
+    if (/\b(all|explore|show|list|every|17)\b/.test(q) &&
+        /\b(baraza|barazas|culture|happiness words|words)\b/.test(q) &&
+        !/\bgrade\s*(5|6|7|8|9|10|11|12)\b/.test(q)) {
+      return { answer: "Here are all the Barazas listed in the supplied event records.", barazas: BARAZAS };
+    }
+    const namedLeader = BARAZA_LEADERS.find(item => q.includes(normalize(item.name)));
+    if (namedLeader) {
+      return { answer: namedLeader.name + " is the Baraza Leader for " + namedLeader.grades + "." };
+    }
+    if (/\b(baraza leader|who leads|who is (the )?(baraza )?leader|who's (the )?(baraza )?leader|head baraza leader|leaders by grade|baraza leaders)\b/.test(q)) {
+      const gradeMatch = q.match(/\bgrade\s*(5|6|7|8|9|10|11|12)\b/);
+      if (gradeMatch) {
+        const grade = Number(gradeMatch[1]);
+        const leader = BARAZA_LEADERS.find(item => {
+          const range = item.grades.match(/(\d+)[–-](\d+)/);
+          return range && grade >= Number(range[1]) && grade <= Number(range[2]);
+        });
+        return leader
+          ? { answer: "The Baraza Leader for Grade " + grade + " is " + leader.name + " (" + leader.grades + ")." }
+          : { answer: "I don't have a Baraza Leader listed for Grade " + grade + ". You can check the event page or ask an organiser.", contact: true };
+      }
+      return { answer: "Baraza Leaders by grade:", leaders: BARAZA_LEADERS };
+    }
+    if (/\b(ideals|ideal)\b/.test(q)) {
+      return {
+        answer: "Round Square's six IDEALS are: " + IDEALS.join(", ") + ".",
+        ideals: IDEALS
+      };
+    }
+    const matchedPeople = PEOPLE.filter(person => {
+      const name = normalize(person.name);
+      const terms = name.split(/\s+/).filter(term => term.length > 2);
+      return q.includes(name) || (terms.length > 1 && terms.every(term => q.includes(term)));
+    });
+    if (matchedPeople.length) {
+      return { answer: "Here is the published event profile:", people: matchedPeople };
+    }
+    if ((/\b(find|which|my)\b/.test(q) && /\bbaraza\b/.test(q)) ||
+        /\bgrade\s*(5|6|7|8|9|10|11|12)\b/.test(q)) {
+      const gradeMatch = q.match(/\bgrade\s*(5|6|7|8|9|10|11|12)\b/);
+      if (gradeMatch) {
+        const grade = Number(gradeMatch[1]);
+        const level = grade <= 7 ? "Junior" : (grade <= 9 ? "Intermediate" : "Senior");
+        return {
+          answer: "Grade " + grade + " falls within the " + level + " Baraza level in the supplied records. Those records do not assign individual students or specific Barazas to grades; here are the Barazas listed at that level.",
+          barazas: BARAZAS.filter(item => item.level.startsWith(level))
+        };
+      }
+      return { answer: "Tell me your grade and I can show the Barazas listed for that level. The published records don't match individual students to a particular Baraza.", followups: ["I am in Grade 5", "I am in Grade 8", "I am in Grade 10"] };
+    }
+    if (/\b(speaker|speakers|keynote|presenter)\b/.test(q)) {
+      if (PEOPLE.length) return { answer: "These are the event speakers and representatives listed here:", people: PEOPLE };
+      return { answer: "I don't have that information yet. You can check the event page or ask an organiser.", contact: true };
+    }
+    if (/\b(announcement|announcements|latest news|updates)\b/.test(q)) {
+      if (ANNOUNCEMENTS.length) {
+        return { answer: "Published event announcements:", announcements: ANNOUNCEMENTS };
+      }
+      return { answer: "I don't have that information yet. You can check the event page or ask an organiser.", contact: true };
+    }
+    if (/\b(schedule|timetable|agenda|upcoming session|what is happening next|what's next|next session)\b/.test(q)) {
+      const junior = /\b(junior)\b/.test(q);
+      const intermediate = /\b(intermediate|senior)\b/.test(q);
+      const answer = junior ? EVENT.schedule.junior : (intermediate ? EVENT.schedule.intermediate : "I can't reliably tell what's happening now or next because this page has no live event clock. The published schedule is for " + EVENT.date + " at " + EVENT.venue + " (" + EVENT.timezone + ").");
+      return { answer: answer, link: "itinerary", extraLink: "handbook" };
+    }
+    const matchedFaq = FAQ
+      .flatMap(item => item.keys.map(key => ({ item, key: normalize(key) })))
+      .filter(entry => q.includes(entry.key))
+      .sort((a, b) => b.key.length - a.key.length)[0];
+    if (matchedFaq) {
+      return { answer: matchedFaq.item.answer, link: matchedFaq.item.link, contact: matchedFaq.item.contact };
+    }
+    if (/\b(hi|hello|hey|good morning|good afternoon)\b/.test(q)) {
+      return { answer: "Hello! I'm your Happiness Compass. I can help you find a Baraza, browse the published schedule, or explore the event information." };
+    }
+    return { answer: "I don't have that information yet. You can check the event page or ask an organiser.", link: "handbook", contact: true };
+  }
+
+  function appendResult(result) {
+    if (result.barazas) {
+      showBarazas(result.barazas, result.answer);
+      return;
+    }
+    addMessage(result.answer, "bot");
+    if (result.baraza) {
+      barazaCard(result.baraza);
+    }
+    if (result.leaders) {
+      result.leaders.forEach(leader => addResultCard(leader.name, leader.grades, [], []));
+    }
+    if (result.people) {
+      result.people.forEach(person => {
+        addResultCard(person.name, person.role, [["Profile", person.bio]], [{
+          label: "Explore Speaker",
+          run: () => addMessage(person.name + " — " + person.role + ". " + person.bio, "bot")
+        }]);
+      });
+    }
+    if (result.link) addResourceCard(result.link === "itinerary" ? "Full event itinerary" : "Delegate event handbook", result.link);
+    if (result.extraLink) addResourceCard("Delegate event handbook", result.extraLink);
+    if (result.contact) {
+      addResultCard("Ask an organiser", "For help confirming event information", [], [{ label: "Email team", href: "mailto:" + supportEmail }]);
+    }
+  }
+
+  function setChatMode() {
+    homeView.hidden = true;
+    chatView.hidden = false;
+    backButton.hidden = false;
+    homeButton.hidden = false;
+    input.focus();
+  }
+
+  function ask(question) {
+    const trimmed = question.trim();
+    if (!trimmed || waiting) return;
+    setChatMode();
+    document.getElementById("hc-suggested").hidden = true;
+    addMessage(trimmed, "user");
+    waiting = true;
+    send.disabled = true;
+    input.disabled = true;
+    typingMessage = document.createElement("div");
+    typingMessage.className = "hc-message";
+    typingMessage.setAttribute("role", "status");
+    typingMessage.setAttribute("aria-label", "Compass is finding an answer");
+    const dots = document.createElement("span");
+    dots.className = "hc-typing";
+    dots.setAttribute("aria-hidden", "true");
+    for (let i = 0; i < 3; i += 1) dots.appendChild(document.createElement("span"));
+    typingMessage.appendChild(dots);
+    log.appendChild(typingMessage);
+    scrollToLatest();
+    responseTimer = window.setTimeout(() => {
+      try {
+        if (typingMessage) typingMessage.remove();
+        typingMessage = null;
+        appendResult(findAnswer(trimmed));
+      } catch (error) {
+        if (typingMessage) typingMessage.remove();
+        typingMessage = null;
+        addMessage("I'm sorry, I couldn't load that answer just now. Please try again or ask an organiser.", "bot");
+      } finally {
+        waiting = false;
+        send.disabled = false;
+        input.disabled = false;
+        input.focus();
+      }
+    }, 240);
+  }
+
+  function scrollToLatest() {
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  function resetConversation() {
+    if (responseTimer !== null) window.clearTimeout(responseTimer);
+    if (dialResponseTimer !== null) window.clearTimeout(dialResponseTimer);
+    responseTimer = null;
+    dialResponseTimer = null;
+    if (typingMessage) typingMessage.remove();
+    typingMessage = null;
+    waiting = false;
+    send.disabled = false;
+    input.disabled = false;
+    log.replaceChildren();
+    homeView.hidden = false;
+    chatView.hidden = true;
+    document.getElementById("hc-suggested").hidden = false;
+    backButton.hidden = true;
+    homeButton.hidden = true;
+    dialAnswer.hidden = true;
+    dialAnswerTitle.textContent = "";
+    dialAnswerText.textContent = "";
+    dialAnswerDetails.replaceChildren();
+    dialAnswerActions.replaceChildren();
+    dialRotation = 0;
+    dialNeedle.style.transform = "rotate(0deg)";
+    panel.querySelectorAll("[data-dial-question]").forEach(choice => choice.setAttribute("aria-pressed", "false"));
+    input.value = "";
+    input.style.height = "";
+    messages.scrollTop = 0;
+    homeView.querySelector("[data-dial-question]").focus();
+  }
+
+  function goBack() {
+    if (!chatView.hidden) {
+      homeView.hidden = false;
+      chatView.hidden = true;
+      backButton.hidden = true;
+      homeButton.hidden = true;
+      homeView.querySelector("[data-dial-question]").focus();
+      return;
+    }
+    if (dialResponseTimer !== null) window.clearTimeout(dialResponseTimer);
+    dialResponseTimer = null;
+    dialAnswer.hidden = true;
+    dialAnswerTitle.textContent = "";
+    dialAnswerText.textContent = "";
+    dialAnswerDetails.replaceChildren();
+    dialAnswerActions.replaceChildren();
+    dialRotation = 0;
+    dialNeedle.style.transform = "rotate(0deg)";
+    panel.querySelectorAll("[data-dial-question]").forEach(choice => choice.setAttribute("aria-pressed", "false"));
+    backButton.hidden = true;
+    homeView.querySelector("[data-dial-question]").focus();
+  }
+
+  function chooseDiscovery() {
+    if (shownDiscoveries.size >= discoveries.length) shownDiscoveries = new Set();
+    const unseen = discoveries.filter(item => !shownDiscoveries.has(item.action));
+    const choice = unseen[Math.floor(Math.random() * unseen.length)];
+    shownDiscoveries.add(choice.action);
+    discoveryText.textContent = choice.text;
+    discoverMore.onclick = () => {
+      const item = getBarazaByName(choice.action);
+      if (!item) return;
+      setChatMode();
+      addMessage("A little discovery from the Baraza collection:", "bot");
+      barazaCard(item);
+    };
+  }
+
+  function setOpen(open) {
+    panel.classList.toggle("rs-open", open);
+    panel.setAttribute("aria-hidden", String(!open));
+    scrim.setAttribute("aria-hidden", String(!open));
+    button.setAttribute("aria-expanded", String(open));
+    button.setAttribute("aria-label", open ? "Close Happiness Compass" : "Open Happiness Compass");
+    if (embeddedInDashboard) {
+      window.parent.postMessage({ type: "roundsquare-compass", open }, "*");
+    }
+    if (open) {
+      chooseDiscovery();
+      window.setTimeout(() => {
+        const focusTarget = homeView.hidden ? input : close;
+        if (focusTarget) focusTarget.focus();
+      }, 30);
+    }
+  }
+
+  button.addEventListener("click", () => setOpen(!panel.classList.contains("rs-open")));
+  scrim.addEventListener("click", () => {
+    setOpen(false);
+    button.focus();
+  });
+  close.addEventListener("click", () => {
+    setOpen(false);
+    button.focus();
+  });
+  homeButton.addEventListener("click", resetConversation);
+  backButton.addEventListener("click", goBack);
+  clear.addEventListener("click", resetConversation);
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && panel.classList.contains("rs-open")) {
+      setOpen(false);
+      button.focus();
+    }
+    if (event.key === "Tab" && panel.classList.contains("rs-open")) {
+      const focusable = Array.from(panel.querySelectorAll("button:not([disabled]):not([hidden]), a[href], textarea:not([disabled])"))
+        .filter(element => element.getClientRects().length > 0);
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  form.addEventListener("submit", event => {
+    event.preventDefault();
+    if (waiting || !input.value.trim()) return;
+    const question = input.value;
+    input.value = "";
+    ask(question);
+  });
+  input.addEventListener("input", () => {
+    input.style.height = "auto";
+    input.style.height = Math.min(input.scrollHeight, 104) + "px";
+  });
+  input.addEventListener("keydown", event => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      form.requestSubmit();
+    }
+  });
+
+  panel.addEventListener("click", event => {
+    const dialQuestion = event.target.closest("[data-dial-question]");
+    if (dialQuestion) {
+      const questions = Array.from(panel.querySelectorAll("[data-dial-question]"));
+      answerDialQuestion(dialQuestion.dataset.dialQuestion, questions.indexOf(dialQuestion));
+      backButton.hidden = false;
+      return;
+    }
+    const askButton = event.target.closest("[data-ask]");
+    if (askButton) ask(askButton.dataset.ask);
+    const mode = event.target.closest("[data-mode]");
+    if (!mode) return;
+    const requests = {
+      way: "Explore all Barazas",
+      next: "Show me the upcoming session",
+      cultures: "Explore all Barazas",
+      surprise: null
+    };
+    if (mode.dataset.mode === "surprise") {
+      const unseen = discoveries.filter(item => !shownDiscoveries.has(item.action));
+      const selected = unseen[Math.floor(Math.random() * unseen.length)] || discoveries[0];
+      shownDiscoveries.add(selected.action);
+      const item = getBarazaByName(selected.action);
+      setChatMode();
+      addMessage("A little detour: " + selected.text + ". Each Baraza pairs a happiness word with a language, colour and student leaders.", "bot");
+      if (item) barazaCard(item);
+    } else if (requests[mode.dataset.mode]) {
+      ask(requests[mode.dataset.mode]);
+    }
+  });
+
+  chooseDiscovery();
+})();
+</script>
+</body>
+</html>

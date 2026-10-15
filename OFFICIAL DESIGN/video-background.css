@@ -1,0 +1,46 @@
+.video-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--midnight-navy);
+  pointer-events: none;
+}
+
+.site-header,
+main,
+.site-footer {
+  position: relative;
+  z-index: 1;
+}
+
+.site-header {
+  z-index: 10;
+}
+
+.video-background::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    linear-gradient(90deg, rgba(7, 23, 44, .62), rgba(7, 23, 44, .2) 52%, rgba(7, 23, 44, .82)),
+    linear-gradient(180deg, rgba(7, 23, 44, .5), rgba(7, 23, 44, .2) 45%, rgba(7, 23, 44, .7));
+}
+
+.background-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 700ms ease;
+}
+
+.background-video.is-visible {
+  opacity: .55;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-background {
+    display: none;
+  }
+}

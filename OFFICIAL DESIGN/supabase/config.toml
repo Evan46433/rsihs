@@ -1,0 +1,4 @@
+project_id = "official-design"
+
+[functions.baraza-leader-auth]
+verify_jwt = false

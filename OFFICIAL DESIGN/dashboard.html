@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Your Roundsquare event dashboard." />
+    <title>Dashboard | Roundsquare</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="stylesheet" href="discussion-planner.css" />
+    <link rel="icon" type="image/png" href="Images/ihslogo.png" />
+  </head>
+  <body>
+    <main class="dashboard-page">
+      <div class="dashboard-shell">
+        <header class="dashboard-header">
+          <a class="brand" href="index.html" aria-label="Roundsquare home">
+            <span class="brand-logos" aria-hidden="true">
+              <img src="Images/ihslogo.png" alt="" />
+              <img src="Images/roundsquarelogo.jpeg" alt="" />
+            </span>
+            <span>Roundsquare <small>2026</small></span>
+          </a>
+          <div class="header-actions">
+            <button class="icon-button notification-button" type="button" aria-label="View notifications" aria-expanded="false" aria-controls="notification-panel"><i class="fa-regular fa-bell" aria-hidden="true"></i><span class="notification-badge" aria-label="0 unread notifications" hidden>0</span></button>
+            <a class="leader-signout-link" href="signin.html"><i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i> Sign out</a>
+          </div>
+        </header>
+
+        <nav class="dashboard-nav" aria-label="Dashboard navigation">
+          <a class="is-active" href="#home"><i class="fa-solid fa-house" aria-hidden="true"></i><span>Home</span></a>
+          <a class="leader-profile-link" href="#leader-profile"><i class="fa-solid fa-id-card" aria-hidden="true"></i><span>Baraza Profile</span></a>
+          <a class="leader-planner-link" href="#discussion-planner"><i class="fa-solid fa-comments" aria-hidden="true"></i><span>Discussion Planner</span></a>
+          <a href="#schedule"><i class="fa-regular fa-calendar" aria-hidden="true"></i><span>Schedule</span></a>
+          <button class="baraza-nav-link" type="button"><i class="fa-solid fa-compass" aria-hidden="true"></i><span>Baraza</span></button>
+          <a href="#about-view" data-dashboard-page="about"><i class="fa-solid fa-circle-info" aria-hidden="true"></i><span>About</span></a>
+          <div class="more-nav-item">
+            <button class="more-nav-button" type="button" aria-expanded="false" aria-controls="more-menu">
+              <i class="fa-solid fa-ellipsis" aria-hidden="true"></i><span>More</span>
+            </button>
+            <div class="more-menu" id="more-menu" aria-label="More dashboard options" aria-hidden="true">
+              <a href="#contact-view" data-dashboard-page="contact"><i class="fa-solid fa-envelope" aria-hidden="true"></i><span>Contact</span></a>
+              <button class="settings-nav-link" type="button"><i class="fa-solid fa-gear" aria-hidden="true"></i><span>Settings</span></button>
+            </div>
+          </div>
+        </nav>
+
+        <section class="settings-view" aria-labelledby="settings-title" hidden>
+          <p class="eyebrow">Website information</p>
+          <h1 id="settings-title">Settings</h1>
+          <div class="settings-row">
+            <span>Website version</span>
+            <strong>1.8.0</strong>
+          </div>
+        </section>
+
+        <section class="dashboard-site-view" aria-label="Website information" hidden>
+          <iframe class="dashboard-site-frame" title="About Roundsquare" loading="lazy" scrolling="no" src="about:blank"></iframe>
+        </section>
+
+        <section class="baraza-directory-view" aria-labelledby="directory-title" hidden>
+          <div class="view-heading">
+            <p class="eyebrow">Find your people</p>
+            <h1 id="directory-title">Baraza <em>directory.</em></h1>
+            <p>Explore every Baraza profile, its language, ribbon colour and student leadership.</p>
+          </div>
+          <div class="baraza-directory-grid" data-baraza-directory></div>
+        </section>
+
+        <section class="baraza-profile-view" id="leader-profile" aria-labelledby="profile-title" hidden>
+          <div class="view-heading">
+            <p class="leader-dashboard-welcome" data-leader-welcome hidden></p>
+            <button class="view-back-button" type="button" data-open-baraza-directory><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Baraza directory</button>
+            <p class="eyebrow">Baraza profile</p>
+            <h1 id="profile-title"></h1>
+            <p id="profile-language"></p>
+          </div>
+          <div class="profile-ribbon" id="profile-ribbon"><span>Ribbon colour</span><strong id="profile-ribbon-name"></strong></div>
+          <div class="profile-meta-grid">
+            <article><span>Baraza level</span><strong id="profile-level"></strong></article>
+            <article><span>Room location</span><strong>To be confirmed</strong><small>Room details will be added when available.</small></article>
+          </div>
+          <section class="leadership-panel">
+            <p class="eyebrow">Student leadership</p>
+            <h2>Leading the Baraza</h2>
+            <div class="leader-grid">
+              <div><span>Head Baraza Leader</span><strong id="profile-head"></strong></div>
+              <div><span>Co-Baraza Leader</span><strong id="profile-co-one"></strong></div>
+              <div><span>Co-Baraza Leader</span><strong id="profile-co-two"></strong></div>
+            </div>
+          </section>
+        </section>
+
+        <section class="discussion-planner-view" id="discussion-planner" aria-labelledby="discussion-planner-title" hidden>
+          <div class="planner-heading">
+            <div>
+              <p class="eyebrow">Baraza leader tools</p>
+              <h1 id="discussion-planner-title">Discussion <em>Planner.</em></h1>
+              <p class="planner-intro">Prepare your Baraza conversation and keep each speaker on time.</p>
+            </div>
+            <span class="discussion-status-badge" data-discussion-status>Draft</span>
+          </div>
+          <div class="planner-toolbar">
+            <button class="planner-button planner-button-secondary" type="button" data-create-discussion><i class="fa-solid fa-plus" aria-hidden="true"></i> Create Discussion</button>
+            <button class="planner-button planner-button-secondary" type="button" data-view-discussions><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i> View Previous Discussions</button>
+          </div>
+          <p class="planner-status-message" data-planner-status role="status" aria-live="polite"></p>
+
+          <div class="planner-list-panel" data-discussion-list-panel hidden>
+            <div class="planner-section-heading"><div><p class="eyebrow">Your Baraza archive</p><h2>Previous discussions</h2></div><button class="planner-text-button" type="button" data-back-to-editor><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to planner</button></div>
+            <div class="discussion-list" data-discussion-list></div>
+          </div>
+
+          <div class="discussion-editor" data-discussion-editor>
+            <form class="planner-form" data-discussion-form novalidate>
+              <input type="hidden" name="discussionId" />
+              <div class="planner-overview-card">
+                <div class="planner-overview-heading"><div><p class="eyebrow">Discussion overview</p><h2 data-baraza-name></h2></div><span class="planner-overview-icon"><i class="fa-solid fa-people-group" aria-hidden="true"></i></span></div>
+                <div class="planner-field-grid">
+                  <label>Discussion title<input name="title" maxlength="120" placeholder="e.g. Building a kinder community" /></label>
+                  <label class="planner-field-wide">Topic or discussion question<textarea name="topic" rows="3" maxlength="2000" placeholder="What question will guide your Baraza discussion?"></textarea></label>
+                </div>
+              </div>
+
+              <div class="planner-config-card">
+                <div class="planner-section-heading"><div><p class="eyebrow">Speaking order</p><h2>Speakers</h2><p class="planner-muted" data-speaker-count>1 speaker · Set each speaker's individual time allowance.</p></div><button class="planner-button planner-button-secondary" type="button" data-add-speaker><i class="fa-solid fa-plus" aria-hidden="true"></i> Add speaker</button></div>
+                <div class="speaker-editor-list" data-speaker-editor-list></div>
+                <p class="planner-warning" data-speaker-duration-warning hidden><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Every speaker needs a speaking duration before you can start.</p>
+              </div>
+
+              <div class="planner-total-card">
+                <span><i class="fa-regular fa-hourglass-half" aria-hidden="true"></i> Planned total duration</span>
+                <strong data-planned-duration>00:00</strong>
+              </div>
+              <div class="planner-actions">
+                <button class="planner-button planner-button-secondary" type="button" data-save-draft><i class="fa-regular fa-floppy-disk" aria-hidden="true"></i> Save Draft</button>
+                <button class="planner-button planner-button-primary" type="button" data-start-discussion><i class="fa-solid fa-play" aria-hidden="true"></i> Start Discussion</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="discussion-live-view" data-discussion-live hidden>
+            <div class="live-heading">
+              <div><p class="eyebrow">Live discussion</p><h2 data-live-title></h2><p data-live-topic></p><p class="live-discussion-meta" data-live-meta></p></div>
+              <span class="discussion-status-badge is-in-progress"><i class="fa-solid fa-circle" aria-hidden="true"></i> In Progress</span>
+            </div>
+            <div class="live-timer-card" data-live-timer-card>
+              <p class="live-stage-label" data-live-stage></p>
+              <p class="live-speaker-label">CURRENT SPEAKER</p>
+              <h3 data-live-speaker></h3>
+              <p class="live-clock" data-live-clock role="timer" aria-live="off">00:00</p>
+              <p class="live-timer-state" data-live-state aria-live="polite">Paused</p>
+              <p class="live-expired-alert" data-live-alert hidden><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Time expired — move to the next stage when ready.</p>
+              <div class="live-progress-track" role="progressbar" aria-label="Discussion stage progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span data-live-progress></span></div>
+              <div class="live-meta-grid">
+                <div><span><i class="fa-solid fa-forward-step" aria-hidden="true"></i> NEXT</span><strong data-live-next>—</strong></div>
+                <div><span><i class="fa-regular fa-clock" aria-hidden="true"></i> ELAPSED</span><strong data-live-elapsed>00:00</strong></div>
+                <div><span><i class="fa-solid fa-list-ol" aria-hidden="true"></i> STAGE</span><strong data-live-stage-count>1 of 1</strong></div>
+              </div>
+            </div>
+            <div class="live-controls">
+              <button class="planner-button planner-button-primary" type="button" data-timer-start><i class="fa-solid fa-play" aria-hidden="true"></i> Start</button>
+              <button class="planner-button planner-button-secondary" type="button" data-timer-pause><i class="fa-solid fa-pause" aria-hidden="true"></i> Pause</button>
+              <button class="planner-button planner-button-secondary" type="button" data-timer-resume><i class="fa-solid fa-play" aria-hidden="true"></i> Resume</button>
+              <button class="planner-button planner-button-secondary" type="button" data-timer-reset><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset Current Timer</button>
+              <button class="planner-button planner-button-secondary" type="button" data-timer-add><i class="fa-solid fa-plus" aria-hidden="true"></i> Add 30 Seconds</button>
+              <button class="planner-button planner-button-warning" type="button" data-timer-skip><i class="fa-solid fa-forward" aria-hidden="true"></i> Skip Speaker</button>
+              <button class="planner-button planner-button-secondary" type="button" data-timer-back><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to Planner</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="leader-dashboard-status" data-leader-dashboard-status role="status" aria-live="polite" hidden>
+          <p class="eyebrow">Baraza access</p>
+          <h1>Unable to load your dashboard</h1>
+          <p data-leader-dashboard-status-message></p>
+          <a href="signin.html">Return to sign in</a>
+        </section>
+
+        <section class="welcome-section" id="home">
+          <div class="welcome-copy">
+            <p class="eyebrow"><span class="pulse"></span> Your event companion</p>
+            <h1>Good <span id="time-greeting">morning</span>,<br /><span id="student-name">there.</span></h1>
+            <p class="welcome-text">A day to connect, discover and grow. Everything you need for your Roundsquare experience is right here.</p>
+            <a class="primary-action" href="#schedule">Explore your day <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+            <button class="find-baraza-button" type="button" data-open-your-baraza><i class="fa-solid fa-compass" aria-hidden="true"></i><span>Find your Baraza</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+          </div>
+          <div class="welcome-art" aria-hidden="true">
+            <div class="welcome-carousel">
+              <img class="welcome-slide is-active" src="Images/carousel/1.jpeg" alt="" />
+              <img class="welcome-slide" data-src="Images/carousel/2.jpeg" alt="" />
+              <img class="welcome-slide" data-src="Images/carousel/3.jpeg" alt="" />
+              <img class="welcome-slide" data-src="Images/carousel/4.jpeg" alt="" />
+              <img class="welcome-slide" data-src="Images/carousel/5.jpeg" alt="" />
+            </div>
+            <div class="art-ring art-ring-one"></div>
+            <div class="art-ring art-ring-two"></div>
+            <span class="art-star star-one">✦</span><span class="art-star star-two">✦</span>
+            <span class="art-label">Pursuit<br />of happiness</span>
+          </div>
+        </section>
+
+        <section class="baraza-banner" id="baraza" aria-labelledby="baraza-title">
+          <div class="baraza-banner-icon"><i class="fa-solid fa-compass" aria-hidden="true"></i></div>
+          <div><p class="eyebrow">Your Baraza</p><h2 id="baraza-title">King Constantine</h2><p id="baraza-subtitle">Grades 5–7 · Junior</p></div>
+          <span class="baraza-banner-tag">Your group</span>
+        </section>
+        <aside class="delegate-alert" aria-labelledby="delegate-alert-title" data-delegate-deadline="2026-10-13T23:59:59+04:00">
+          <div class="delegate-alert-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
+          <div class="delegate-alert-copy">
+            <p class="eyebrow">New alert</p>
+            <h2 id="delegate-alert-title">Delegate applications open</h2>
+            <p class="delegate-alert-deadline">Applications close 13 October · 11:59 PM GST</p>
+            <p class="delegate-alert-countdown">Closes in <strong data-delegate-countdown role="timer" aria-live="off"></strong></p>
+          </div>
+          <a class="delegate-alert-button" href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=KqwhzDIhXkeAqvuIYaXkV2dcA0I6YSxBseIsfh_Fn-RUNFJPUThJMFJKWThRU1U3N0dHMDVIUU43MC4u&amp;route=shorturl" target="_blank" rel="noopener noreferrer">Apply now <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+        </aside>
+        <section class="event-strip" aria-label="Event details">
+          <div><i class="fa-regular fa-calendar" aria-hidden="true"></i><span><small>DATE</small><strong>17 October 2026</strong></span></div>
+          <div><i class="fa-regular fa-clock" aria-hidden="true"></i><span><small>TIME</small><strong>9:00 AM — 5:45 PM</strong></span></div>
+          <div><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span><small>VENUE</small><strong>The Indian High School</strong></span></div>
+        </section>
+        <div class="resource-links">
+          <a class="handbook-link handbook-banner" href="assets/Pursuit%20of%20Happiness%20%E2%80%94%20Handbook-selection%20(2).pdf" target="_blank" rel="noopener"><i class="fa-solid fa-book-open" aria-hidden="true"></i><span><strong>Read the full handbook</strong><small>Open the event guide PDF</small></span><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          <button class="reminder-button" type="button"><i class="fa-solid fa-bell" aria-hidden="true"></i><span>GET REMINDERS</span></button>
+          <a class="handbook-link handbook-banner schedule-pdf-link" href="assets/Roundsquare%20itinerary%2C%20Oct%202026%20(2).pdf" target="_blank" rel="noopener"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i><span><strong>View the new schedule</strong><small>Open the event itinerary PDF</small></span><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+        </div>
+        <section class="event-countdown" aria-labelledby="countdown-title">
+          <canvas class="countdown-confetti" aria-hidden="true"></canvas>
+          <div class="countdown-content">
+            <p class="eyebrow" data-countdown-eyebrow>The countdown is on</p>
+            <h2 id="countdown-title">Until we meet.</h2>
+            <div class="countdown-timer" role="timer" aria-label="Time remaining until the event">
+              <div><strong data-countdown-unit="days">00</strong><span>Days</span></div>
+              <div><strong data-countdown-unit="hours">00</strong><span>Hours</span></div>
+              <div><strong data-countdown-unit="minutes">00</strong><span>Minutes</span></div>
+              <div><strong data-countdown-unit="seconds">00</strong><span>Seconds</span></div>
+            </div>
+            <p class="celebration-dismiss-countdown" data-celebration-dismiss-countdown hidden>
+              Celebration closes in <time data-celebration-dismiss-timer>15:00</time>
+            </p>
+            <p class="countdown-note">17 October 2026 · 9:00 AM · The Indian High School</p>
+          </div>
+        </section>
+
+        <section class="section-block" id="schedule">
+          <div class="section-heading">
+            <div><p class="eyebrow">Make it count</p><h2>Your day, <em>your way.</em></h2></div>
+            <span class="schedule-date"><i class="fa-regular fa-calendar" aria-hidden="true"></i> 17 October 2026</span>
+          </div>
+          <div class="agenda-panel">
+            <div class="agenda-header">
+              <div>
+                <p class="agenda-kicker">Pursuit of happiness · 2026</p>
+                <h3>Event <em>agenda</em></h3>
+              </div>
+              <button class="add-calendar-button" type="button"><i class="fa-solid fa-calendar-plus" aria-hidden="true"></i><span>Add to calendar</span></button>
+            </div>
+            <div class="agenda-tabs" role="tablist" aria-label="Choose your agenda">
+              <button class="agenda-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="intermediate-agenda" id="intermediate-tab" data-agenda="intermediate">Intermediate &amp; Senior</button>
+              <button class="agenda-tab" type="button" role="tab" aria-selected="false" aria-controls="junior-agenda" id="junior-tab" data-agenda="junior">Junior</button>
+            </div>
+            <div class="agenda-list is-visible" id="intermediate-agenda" role="tabpanel" aria-labelledby="intermediate-tab" data-agenda-panel="intermediate">
+              <div class="agenda-row"><time>9:00 <span>–</span> 9:30</time><span>Registration</span></div>
+              <div class="agenda-row"><time>9:30 <span>–</span> 10:30</time><span>Opening Ceremony</span></div>
+              <div class="agenda-row agenda-row-highlight"><time>10:30 <span>–</span> 12:40</time><span>Baraza Session 1</span></div>
+              <div class="agenda-row agenda-row-lunch"><time>12:40 <span>–</span> 1:30</time><span>Lunch</span></div>
+              <div class="agenda-row"><time>1:30 <span>–</span> 2:00</time><span>Keynote Speaker</span></div>
+              <div class="agenda-row"><time>2:00 <span>–</span> 2:30</time><span>Creative Expression Session</span></div>
+              <div class="agenda-row"><time>2:30 <span>–</span> 3:00</time><span>Photo Sessions</span></div>
+              <div class="agenda-row agenda-row-highlight"><time>3:00 <span>–</span> 4:30</time><span>Baraza Session 2</span></div>
+              <div class="agenda-row"><time>4:30 <span>–</span> 5:30</time><span>Team Dance</span></div>
+              <div class="agenda-row agenda-row-final"><time>5:45</time><span>Dispersal</span></div>
+            </div>
+            <div class="agenda-list" id="junior-agenda" role="tabpanel" aria-labelledby="junior-tab" data-agenda-panel="junior" hidden>
+              <div class="agenda-row"><time>9:00 <span>–</span> 9:30</time><span>Registration</span></div>
+              <div class="agenda-row"><time>9:30 <span>–</span> 10:30</time><span>Opening Ceremony</span></div>
+              <div class="agenda-row"><time>10:30 <span>–</span> 11:40</time><span>Scavenger Hunt</span></div>
+              <div class="agenda-row agenda-row-highlight"><time>11:40 <span>–</span> 12:40</time><span>Baraza Session 1</span></div>
+              <div class="agenda-row agenda-row-lunch"><time>12:40 <span>–</span> 1:30</time><span>Lunch</span></div>
+              <div class="agenda-row"><time>1:30 <span>–</span> 2:00</time><span>Keynote Speaker</span></div>
+              <div class="agenda-row"><time>2:00 <span>–</span> 2:30</time><span>Creative Expression Session</span></div>
+              <div class="agenda-row"><time>2:30 <span>–</span> 3:00</time><span>Photo Sessions</span></div>
+              <div class="agenda-row agenda-row-highlight"><time>3:00 <span>–</span> 4:30</time><span>Baraza Session 2</span></div>
+              <div class="agenda-row"><time>4:30 <span>–</span> 5:30</time><span>Team Dance</span></div>
+              <div class="agenda-row agenda-row-final"><time>5:45</time><span>Dispersal</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-block" id="speakers">
+          <div class="section-heading"><div><p class="eyebrow">People to meet</p><h2>Meet the <em>speakers.</em></h2></div><span class="speakers-note"><i class="fa-solid fa-star" aria-hidden="true"></i> Meaningful voices</span></div>
+          <div class="people-row">
+            <a class="person-card person-card-featured" href="https://www.linkedin.com/in/punit-mk-vasu-180264172/" target="_blank" rel="noopener noreferrer">
+              <div class="person-photo-wrap"><img class="person-photo" src="Images/speakers/punitceo.jpeg" alt="Punit MK Vasu" /></div>
+              <div class="person-details"><strong>Punit MK Vasu</strong><span>Head of School</span><p>Leading The Indian High Group of Schools with a focus on inclusive, innovative and meaningful education.</p></div>
+              <i class="fa-solid fa-arrow-up-right-from-square person-card-icon" aria-hidden="true"></i>
+            </a>
+            <a class="person-card person-card-featured" href="https://www.linkedin.com/in/dr-abhilasha-chaube-352a10a2/" target="_blank" rel="noopener noreferrer">
+              <div class="person-photo-wrap"><img class="person-photo" src="Images/speakers/abhilasha.jpeg" alt="Dr. Abhilasha Chaube" /></div>
+              <div class="person-details"><strong>Dr. Abhilasha Chaube</strong><span>Round Square Representative</span><p>Creating engaging student experiences through Round Square initiatives, MUN and multicultural programmes.</p></div>
+              <i class="fa-solid fa-arrow-up-right-from-square person-card-icon" aria-hidden="true"></i>
+            </a>
+          </div>
+        </section>
+
+        <section class="quick-links">
+          <a class="sign-out-link" href="signin.html"><i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i><span><strong>Sign out</strong><small>Return to the sign-in page</small></span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+        </section>
+
+        <footer class="dashboard-footer">
+          <span>THE INDIAN HIGH SCHOOL, DUBAI</span>
+        </footer>
+      </div>
+      <div class="notification-panel" id="notification-panel" aria-hidden="true">
+        <div class="notification-card" role="dialog" aria-modal="false" aria-labelledby="notification-title">
+          <button class="notification-close" type="button" aria-label="Close notifications"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+          <i class="fa-regular fa-bell notification-card-icon" aria-hidden="true"></i>
+          <p class="eyebrow">Your updates</p>
+          <h2 id="notification-title">Notifications</h2>
+          <p class="no-notifications">NO NOTIFICATIONS</p>
+          <div class="notification-list" aria-live="polite">
+            <p class="notification-empty">You are all caught up for now.</p>
+          </div>
+          <div class="notification-toast" role="status" aria-live="polite" aria-hidden="true">
+            <i class="fa-regular fa-bell" aria-hidden="true"></i>
+            <span><strong class="notification-toast-title">New notification</strong><small class="notification-toast-message"></small></span>
+          </div>
+          <button class="notification-clear-button" type="button"><i class="fa-solid fa-trash-can" aria-hidden="true"></i> CLEAR REMINDERS</button>
+        </div>
+      </div>
+      <div class="reminder-modal" aria-hidden="true">
+        <div class="reminder-card" role="dialog" aria-modal="true" aria-labelledby="reminder-title">
+          <button class="reminder-close" type="button" aria-label="Close reminders"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+          <p class="eyebrow">Schedule alerts</p>
+          <h2 id="reminder-title">Choose your schedule</h2>
+          <p class="reminder-copy">Select a schedule and allow browser notifications to receive activity reminders.</p>
+          <div class="reminder-options">
+            <button type="button" data-reminder-schedule="intermediate"><strong>Intermediate &amp; Senior</strong><small>Barazas, keynote and team dance</small></button>
+            <button type="button" data-reminder-schedule="junior"><strong>Junior</strong><small>Scavenger hunt, Barazas and team dance</small></button>
+          </div>
+          <button class="confirm-reminders-button" type="button"><i class="fa-solid fa-check" aria-hidden="true"></i> CONFIRM</button>
+          <p class="reminder-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </main>
+    <iframe class="happiness-compass-frame" src="Round_Square_FAQ.html?embed=dashboard" title="Happiness Compass FAQ" loading="eager"></iframe>
+    <script type="module" src="dashboard.js"></script>
+    <script>
+      (() => {
+        const frame = document.querySelector(".happiness-compass-frame");
+        if (!frame) return;
+
+        const resizeFrame = (open) => {
+          if (!open) {
+            frame.classList.remove("is-open");
+            frame.style.width = "66px";
+            frame.style.height = "66px";
+            frame.style.bottom = "";
+            return;
+          }
+
+          frame.classList.add("is-open");
+          const viewportInset = 16;
+          const isSmallScreen = window.matchMedia("(max-width: 600px)").matches;
+          frame.style.width = `${Math.min(430, window.innerWidth - viewportInset * 2)}px`;
+          frame.style.height = `${Math.min(isSmallScreen ? 650 : 680, window.innerHeight - viewportInset * 2)}px`;
+          frame.style.bottom = `${viewportInset}px`;
+        };
+
+        window.addEventListener("message", (event) => {
+          if (event.source !== frame.contentWindow || event.data?.type !== "roundsquare-compass") return;
+          resizeFrame(event.data.open === true);
+        });
+
+        window.addEventListener("resize", () => {
+          if (frame.classList.contains("is-open")) resizeFrame(true);
+        });
+      })();
+    </script>
+  </body>
+</html>

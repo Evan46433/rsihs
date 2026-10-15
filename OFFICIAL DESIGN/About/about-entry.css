@@ -1,0 +1,54 @@
+/* about-entry.css - About page only: RS gate, door/circle portal, title stage, side cube. */
+:root{--rs-navy:#071b3b;--rs-ink:#030c1d;--rs-glow:#9cc4ff;--rs-font:"Plus Jakarta Sans","Inter",system-ui,sans-serif}
+
+html.rs-pending{background:#000}
+html.rs-pending body{visibility:hidden}               /* no flash of content before the gate mounts */
+html.rs-locked,html.rs-locked body{overflow:hidden;overscroll-behavior:none}
+
+/* ---- gate: opaque layer with a mask "hole" that JS opens (slit -> circle -> full) ---- */
+.rs-gate{position:fixed;inset:0;z-index:9999;background:radial-gradient(120% 90% at 50% 40%,#0a2552,var(--rs-ink) 70%);color:#fff;font-family:var(--rs-font);touch-action:none;
+  -webkit-mask-image:radial-gradient(ellipse .5px .5px at 50% 50%,transparent 97%,#000 100%);mask-image:radial-gradient(ellipse .5px .5px at 50% 50%,transparent 97%,#000 100%)}
+.rs-canvas{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;touch-action:none}
+.rs-hint{position:absolute;left:0;right:0;bottom:clamp(36px,11vh,100px);margin:0;text-align:center;font-size:clamp(1rem,2.4vw,1.4rem);font-weight:600;pointer-events:none;padding:0 1rem}
+.rs-skip{position:absolute;top:max(16px,env(safe-area-inset-top));right:16px;background:none;border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:999px;padding:.5rem 1rem;font:inherit;font-size:.85rem;cursor:pointer;touch-action:manipulation}
+.rs-skip:hover{background:rgba(255,255,255,.1)}
+.rs-skip:focus-visible,.rs-cube-wrap:focus-visible{outline:2px solid var(--rs-glow);outline-offset:3px}
+.rs-gate.is-accepted .rs-skip{display:none}
+
+/* glowing rim that follows the portal edge (outside the masked gate so it isn't clipped) */
+.rs-ring{position:fixed;left:50%;top:50%;z-index:10000;width:0;height:0;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;opacity:0;
+  border:1px solid rgba(255,255,255,.85);box-shadow:0 0 30px 4px rgba(156,196,255,.55),inset 0 0 30px rgba(156,196,255,.35)}
+.rs-ring.on{opacity:1;animation:rs-breathe 2.8s ease-in-out infinite}
+@keyframes rs-breathe{50%{box-shadow:0 0 56px 10px rgba(156,196,255,.8),inset 0 0 40px rgba(156,196,255,.5)}}
+
+/* ---- typographic stage ---- */
+.rs-stage{position:fixed;inset:0;z-index:9998;display:grid;place-content:center;gap:.4em;text-align:center;color:#fff;font-family:var(--rs-font);pointer-events:none;
+  background:radial-gradient(90% 80% at 50% 50%,rgba(7,27,59,.82),rgba(3,12,29,.94));opacity:0;transition:opacity .8s,transform 1s cubic-bezier(.7,0,.2,1)}
+.rs-stage.on{opacity:1}
+.rs-stage.out{opacity:0;transform:translateY(-18%)}
+.rs-kicker,.rs-name{margin:0;overflow:hidden;padding:.08em 0;line-height:1.05}
+.rs-kicker{font-size:clamp(1rem,3.2vw,2rem);font-weight:600;letter-spacing:.32em}
+.rs-name{font-size:clamp(2.8rem,11vw,9.5rem);font-weight:800;letter-spacing:-.02em}
+.rs-ch{display:inline-block;transform:translateY(115%);transition:transform 1s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i)*45ms)}
+.rs-stage.in-1 .rs-kicker .rs-ch,.rs-stage.in-2 .rs-name .rs-ch{transform:none}
+.rs-name .rs-ch{color:#fff}
+.rs-more{position:absolute;left:0;right:0;bottom:clamp(28px,8vh,72px);font-size:.95rem;color:rgba(255,255,255,.7);opacity:0;transition:opacity .8s}
+.rs-stage.ready .rs-more{opacity:1;animation:rs-nudge 2s ease-in-out infinite}
+@keyframes rs-nudge{50%{transform:translateY(6px)}}
+
+/* ---- persistent side cube ---- */
+.rs-cube-wrap{--s:clamp(56px,6.5vw,92px);position:fixed;right:clamp(10px,2vw,30px);top:50%;width:var(--s);height:var(--s);margin-top:calc(var(--s)/-2);z-index:60;
+  perspective:700px;cursor:grab;touch-action:pan-y;opacity:0;transform:translateX(36px);transition:opacity .9s,transform .9s}
+.rs-cube-wrap.on{opacity:1;transform:none}
+.rs-cube-wrap:active{cursor:grabbing}
+.rs-cube{position:relative;width:100%;height:100%;transform-style:preserve-3d;will-change:transform}
+.rs-face{position:absolute;inset:0;display:grid;place-items:center;background:#fff;border:1px solid rgba(7,27,59,.15);border-radius:6px;box-shadow:0 10px 28px rgba(7,27,59,.28)}
+.rs-face img{width:74%;height:74%;object-fit:contain;pointer-events:none;-webkit-user-drag:none}
+.rs-f0{transform:translateZ(calc(var(--s)/2))}
+.rs-f1{transform:rotateY(90deg) translateZ(calc(var(--s)/2))}
+.rs-f2{transform:rotateY(180deg) translateZ(calc(var(--s)/2))}
+.rs-f3{transform:rotateY(-90deg) translateZ(calc(var(--s)/2))}
+.rs-f4{transform:rotateX(90deg) translateZ(calc(var(--s)/2))}
+.rs-f5{transform:rotateX(-90deg) translateZ(calc(var(--s)/2))}
+@media (max-width:600px){.rs-cube-wrap{--s:46px;top:auto;bottom:18px;margin-top:0}}
+@media (prefers-reduced-motion:reduce){.rs-ch,.rs-stage,.rs-cube-wrap{transition-duration:1ms}.rs-ring.on,.rs-stage.ready .rs-more{animation:none}}
